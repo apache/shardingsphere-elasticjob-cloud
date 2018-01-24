@@ -1,6 +1,6 @@
 # Elastic-Job - 分布式作业调度解决方案
 
-[![Build Status](https://secure.travis-ci.org/elasticjob/elastic-job.png?branch=master)](https://travis-ci.org/elasticjob/elastic-job)
+[![Build Status](https://secure.travis-ci.org/elasticjob/elastic-job-cloud.png?branch=master)](https://travis-ci.org/elasticjob/elastic-job-cloud)
 [![Maven Status](https://maven-badges.herokuapp.com/maven-central/com.dangdang/elastic-job/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.dangdang/elastic-job)
 [![Coverage Status](https://coveralls.io/repos/elasticjob/elastic-job/badge.svg?branch=master&service=github)](https://coveralls.io/github/elasticjob/elastic-job?branch=master)
 [![GitHub release](https://img.shields.io/github/release/elasticjob/elastic-job.svg)](https://github.com/elasticjob/elastic-job/releases)
