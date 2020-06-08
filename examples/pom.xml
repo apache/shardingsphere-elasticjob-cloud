@@ -10,11 +10,6 @@
     <modules>
         <module>elastic-job-example-jobs</module>
         <module>elastic-job-example-embed-zk</module>
-        
-        <module>elastic-job-example-lite-java</module>
-        <module>elastic-job-example-lite-spring</module>
-        <module>elastic-job-example-lite-springboot</module>
-        
         <module>elastic-job-example-cloud</module>
     </modules>
     
@@ -35,16 +30,6 @@
         <dependencies>
             <dependency>
                 <artifactId>elastic-job-common-core</artifactId>
-                <groupId>com.dangdang</groupId>
-                <version>${elastic-job.version}</version>
-            </dependency>
-            <dependency>
-                <artifactId>elastic-job-lite-core</artifactId>
-                <groupId>com.dangdang</groupId>
-                <version>${elastic-job.version}</version>
-            </dependency>
-            <dependency>
-                <artifactId>elastic-job-lite-spring</artifactId>
                 <groupId>com.dangdang</groupId>
                 <version>${elastic-job.version}</version>
             </dependency>
