@@ -41,7 +41,7 @@ Elastic-Job-Lite and Elastic-Job-Cloud provide unified API. Developers only need
 
 ## Elastic-Job-Cloud
 
-![Elastic-Job-Cloud Architecture](http://ovfotjrsi.bkt.clouddn.com/docs/img/architecture/elastic_job_cloud.png)
+![Elastic-Job-Cloud Architecture](docs/elastic-job-cloud-doc/static/img/architecture/elastic_job_cloud.png)
 
 # [Release Notes](https://github.com/elasticjob/elastic-job/releases)
 
