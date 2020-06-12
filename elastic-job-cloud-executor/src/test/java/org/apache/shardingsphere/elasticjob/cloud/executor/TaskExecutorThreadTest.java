@@ -17,10 +17,6 @@
 
 package org.apache.shardingsphere.elasticjob.cloud.executor;
 
-import org.apache.shardingsphere.elasticjob.cloud.api.JobType;
-import org.apache.shardingsphere.elasticjob.cloud.context.ExecutionType;
-import org.apache.shardingsphere.elasticjob.cloud.executor.fixture.TestJob;
-import org.apache.shardingsphere.elasticjob.cloud.exception.JobSystemException;
 import com.google.protobuf.ByteString;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.mesos.ExecutorDriver;
@@ -28,6 +24,10 @@ import org.apache.mesos.Protos;
 import org.apache.mesos.Protos.TaskID;
 import org.apache.mesos.Protos.TaskInfo;
 import org.apache.mesos.Protos.TaskState;
+import org.apache.shardingsphere.elasticjob.cloud.api.JobType;
+import org.apache.shardingsphere.elasticjob.cloud.context.ExecutionType;
+import org.apache.shardingsphere.elasticjob.cloud.exception.JobSystemException;
+import org.apache.shardingsphere.elasticjob.cloud.executor.fixture.TestJob;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,9 +54,9 @@ public final class TaskExecutorThreadTest {
         TaskExecutor.TaskThread taskThread = new TaskExecutor().new TaskThread(executorDriver, taskInfo);
         taskThread.run();
         Mockito.verify(executorDriver).sendStatusUpdate(Protos.TaskStatus.newBuilder().setTaskId(taskInfo.getTaskId()).setState(TaskState.TASK_RUNNING).build());
-        Mockito.verify(executorDriver).sendStatusUpdate(Protos.TaskStatus.newBuilder().setTaskId(taskInfo.getTaskId()).setState(Protos.TaskState.TASK_FINISHED).build());
+        Mockito.verify(executorDriver).sendStatusUpdate(Protos.TaskStatus.newBuilder().setTaskId(taskInfo.getTaskId()).setState(TaskState.TASK_FINISHED).build());
     }
-    
+
     @Test
     public void assertLaunchTaskWithTransientTaskAndSpringSimpleJob() {
         TaskInfo taskInfo = buildSpringDaemonTaskInfo();
@@ -64,14 +64,14 @@ public final class TaskExecutorThreadTest {
         taskThread.run();
         Mockito.verify(executorDriver).sendStatusUpdate(Protos.TaskStatus.newBuilder().setTaskId(taskInfo.getTaskId()).setState(TaskState.TASK_RUNNING).build());
     }
-    
+
     @Test
     public void assertLaunchTaskWithDaemonTaskAndJavaScriptJob() {
         TaskInfo taskInfo = buildSpringScriptTransientTaskInfo();
         TaskExecutor.TaskThread taskThread = new TaskExecutor().new TaskThread(executorDriver, taskInfo);
         taskThread.run();
         Mockito.verify(executorDriver).sendStatusUpdate(Protos.TaskStatus.newBuilder().setTaskId(taskInfo.getTaskId()).setState(TaskState.TASK_RUNNING).build());
-        Mockito.verify(executorDriver).sendStatusUpdate(Protos.TaskStatus.newBuilder().setTaskId(taskInfo.getTaskId()).setState(Protos.TaskState.TASK_FINISHED).build());
+        Mockito.verify(executorDriver).sendStatusUpdate(Protos.TaskStatus.newBuilder().setTaskId(taskInfo.getTaskId()).setState(TaskState.TASK_FINISHED).build());
     }
     
     @Test
@@ -81,7 +81,7 @@ public final class TaskExecutorThreadTest {
         try {
             taskThread.run();
         } catch (final JobSystemException ex) {
-            Assert.assertTrue(ex.getMessage().startsWith("Elastic-Job: Class 'TaskExecutorThreadTest' must implements ElasticJob interface."));
+            Assert.assertTrue(ex.getMessage().startsWith("Elastic-Job: Class 'org.apache.shardingsphere.elasticjob.cloud.executor.TaskExecutorThreadTest' must implements ElasticJob interface."));
         }
     }
     
