@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,14 +13,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.executor.handler;
 
 import io.elasticjob.cloud.executor.handler.impl.DefaultExecutorServiceHandler;
 import lombok.RequiredArgsConstructor;
+import org.hamcrest.core.Is;
+import org.hamcrest.core.IsNot;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Set;
@@ -29,10 +32,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
-import static org.junit.Assert.assertThat;
 
 public final class ExecutorServiceHandlerRegistryTest {
     
@@ -45,13 +44,13 @@ public final class ExecutorServiceHandlerRegistryTest {
     public void assertRemove() {
         ExecutorService actual = ExecutorServiceHandlerRegistry.getExecutorServiceHandler("test_job", new DefaultExecutorServiceHandler());
         ExecutorServiceHandlerRegistry.remove("test_job");
-        assertThat(actual, not(ExecutorServiceHandlerRegistry.getExecutorServiceHandler("test_job", new DefaultExecutorServiceHandler())));
+        Assert.assertThat(actual, IsNot.not(ExecutorServiceHandlerRegistry.getExecutorServiceHandler("test_job", new DefaultExecutorServiceHandler())));
     }
     
     @Test
     public void assertGetExecutorServiceHandlerForSameThread() {
-        assertThat(ExecutorServiceHandlerRegistry.getExecutorServiceHandler("test_job", new DefaultExecutorServiceHandler()), 
-                is(ExecutorServiceHandlerRegistry.getExecutorServiceHandler("test_job", new DefaultExecutorServiceHandler())));
+        Assert.assertThat(ExecutorServiceHandlerRegistry.getExecutorServiceHandler("test_job", new DefaultExecutorServiceHandler()),
+                Is.is(ExecutorServiceHandlerRegistry.getExecutorServiceHandler("test_job", new DefaultExecutorServiceHandler())));
     }
     
     @Test
@@ -65,8 +64,8 @@ public final class ExecutorServiceHandlerRegistryTest {
             executorService.submit(new GetExecutorServiceHandlerTask(barrier, latch, set));
         }
         latch.await();
-        assertThat(set.size(), is(1));
-        assertThat(ExecutorServiceHandlerRegistry.getExecutorServiceHandler("test_job", new DefaultExecutorServiceHandler()), is(set.iterator().next()));
+        Assert.assertThat(set.size(), Is.is(1));
+        Assert.assertThat(ExecutorServiceHandlerRegistry.getExecutorServiceHandler("test_job", new DefaultExecutorServiceHandler()), Is.is(set.iterator().next()));
     }
     
     @RequiredArgsConstructor

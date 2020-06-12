@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +13,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.fixture;
@@ -39,19 +39,39 @@ public final class APIJsonConstants {
     private static final String SCRIPT_JOB_JSON = "{\"jobName\":\"test_job\",\"jobClass\":\"io.elasticjob.cloud.api.script.ScriptJob\",\"jobType\":\"SCRIPT\",\"cron\":\"0/1 * * * * ?\","
             + "\"shardingTotalCount\":3,\"shardingItemParameters\":\"\",\"jobParameter\":\"\",\"failover\":false,\"misfire\":true,\"description\":\"\","
             + "\"jobProperties\":%s,\"scriptCommandLine\":\"test.sh\"}";
-    
+
+    /**
+     * Get job properties in json format.
+     * @param jobExceptionHandler the job exception handler
+     * @return the json string
+     */
     public static String getJobPropertiesJson(final String jobExceptionHandler) {
         return String.format(JOB_PROPS_JSON, jobExceptionHandler);
     }
-    
+
+    /**
+     * Get simple job in json format.
+     * @param jobExceptionHandler the job exception handler
+     * @return the json string
+     */
     public static String getSimpleJobJson(final String jobExceptionHandler) {
         return String.format(SIMPLE_JOB_JSON, getJobPropertiesJson(jobExceptionHandler));
     }
-    
+
+    /**
+     * Get dataflow job in json format.
+     * @param jobExceptionHandler the job exception handler
+     * @return the json string
+     */
     public static String getDataflowJobJson(final String jobExceptionHandler) {
         return String.format(DATAFLOW_JOB_JSON, getJobPropertiesJson(jobExceptionHandler));
     }
-    
+
+    /**
+     * Get script job in json format.
+     * @param jobExceptionHandler the job exception handler
+     * @return the json string
+     */
     public static String getScriptJobJson(final String jobExceptionHandler) {
         return String.format(SCRIPT_JOB_JSON, getJobPropertiesJson(jobExceptionHandler));
     }

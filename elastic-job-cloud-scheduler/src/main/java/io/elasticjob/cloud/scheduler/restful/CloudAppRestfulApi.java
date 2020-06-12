@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +13,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.scheduler.restful;
@@ -45,8 +45,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
-
-import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 
 /**
  * 云作业应用的REST API.
@@ -125,7 +123,7 @@ public final class CloudAppRestfulApi {
     public Response detail(@PathParam("appName") final String appName) {
         Optional<CloudAppConfiguration> appConfig = appConfigService.load(appName);
         if (!appConfig.isPresent()) {
-            return Response.status(NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
         return Response.ok(appConfig.get()).build();
     }

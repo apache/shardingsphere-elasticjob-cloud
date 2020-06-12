@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,11 +13,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.scheduler.config.app;
 
+import io.elasticjob.cloud.scheduler.config.constants.CloudConfigurationConstants;
 import io.elasticjob.cloud.util.json.GsonFactory;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -26,14 +27,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 
-import static io.elasticjob.cloud.scheduler.config.constants.CloudConfigurationConstants.APP_CACHE_ENABLE;
-import static io.elasticjob.cloud.scheduler.config.constants.CloudConfigurationConstants.APP_NAME;
-import static io.elasticjob.cloud.scheduler.config.constants.CloudConfigurationConstants.APP_URL;
-import static io.elasticjob.cloud.scheduler.config.constants.CloudConfigurationConstants.BOOTSTRAP_SCRIPT;
-import static io.elasticjob.cloud.scheduler.config.constants.CloudConfigurationConstants.CPU_COUNT;
-import static io.elasticjob.cloud.scheduler.config.constants.CloudConfigurationConstants.EVENT_TRACE_SAMPLING_COUNT;
-import static io.elasticjob.cloud.scheduler.config.constants.CloudConfigurationConstants.MEMORY_MB;
-
 /**
  * 云作业App配置的Gson工厂.
  *
@@ -42,7 +35,7 @@ import static io.elasticjob.cloud.scheduler.config.constants.CloudConfigurationC
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CloudAppConfigurationGsonFactory {
     
-    static  {
+    static {
         GsonFactory.registerTypeAdapter(CloudAppConfiguration.class, new CloudAppConfigurationGsonTypeAdapter());
     }
     
@@ -86,25 +79,25 @@ public final class CloudAppConfigurationGsonFactory {
             while (in.hasNext()) {
                 String jsonName = in.nextName();
                 switch (jsonName) {
-                    case APP_NAME:
+                    case CloudConfigurationConstants.APP_NAME:
                         appName = in.nextString();
                         break;
-                    case APP_URL:
+                    case CloudConfigurationConstants.APP_URL:
                         appURL = in.nextString();
                         break;
-                    case BOOTSTRAP_SCRIPT:
+                    case CloudConfigurationConstants.BOOTSTRAP_SCRIPT:
                         bootstrapScript = in.nextString();
                         break;
-                    case CPU_COUNT:
+                    case CloudConfigurationConstants.CPU_COUNT:
                         cpuCount = in.nextDouble();
                         break;
-                    case MEMORY_MB:
+                    case CloudConfigurationConstants.MEMORY_MB:
                         memoryMB = in.nextDouble();
                         break;
-                    case APP_CACHE_ENABLE:
+                    case CloudConfigurationConstants.APP_CACHE_ENABLE:
                         appCacheEnable = in.nextBoolean();
                         break;
-                    case EVENT_TRACE_SAMPLING_COUNT:
+                    case CloudConfigurationConstants.EVENT_TRACE_SAMPLING_COUNT:
                         eventTraceSamplingCount = in.nextInt();
                         break;
                     default:
@@ -118,13 +111,13 @@ public final class CloudAppConfigurationGsonFactory {
         @Override
         public void write(final JsonWriter out, final CloudAppConfiguration value) throws IOException {
             out.beginObject();
-            out.name(APP_NAME).value(value.getAppName());
-            out.name(APP_URL).value(value.getAppURL());
-            out.name(BOOTSTRAP_SCRIPT).value(value.getBootstrapScript());
-            out.name(CPU_COUNT).value(value.getCpuCount());
-            out.name(MEMORY_MB).value(value.getMemoryMB());
-            out.name(APP_CACHE_ENABLE).value(value.isAppCacheEnable());
-            out.name(EVENT_TRACE_SAMPLING_COUNT).value(value.getEventTraceSamplingCount());
+            out.name(CloudConfigurationConstants.APP_NAME).value(value.getAppName());
+            out.name(CloudConfigurationConstants.APP_URL).value(value.getAppURL());
+            out.name(CloudConfigurationConstants.BOOTSTRAP_SCRIPT).value(value.getBootstrapScript());
+            out.name(CloudConfigurationConstants.CPU_COUNT).value(value.getCpuCount());
+            out.name(CloudConfigurationConstants.MEMORY_MB).value(value.getMemoryMB());
+            out.name(CloudConfigurationConstants.APP_CACHE_ENABLE).value(value.isAppCacheEnable());
+            out.name(CloudConfigurationConstants.EVENT_TRACE_SAMPLING_COUNT).value(value.getEventTraceSamplingCount());
             out.endObject();
         }
     }

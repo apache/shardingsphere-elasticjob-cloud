@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +13,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.executor.local;
@@ -24,6 +24,8 @@ import io.elasticjob.cloud.config.JobCoreConfiguration;
 import io.elasticjob.cloud.config.dataflow.DataflowJobConfiguration;
 import io.elasticjob.cloud.config.simple.SimpleJobConfiguration;
 import io.elasticjob.cloud.exception.JobSystemException;
+import org.hamcrest.core.Is;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,12 +35,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Arrays;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public final class LocalTaskExecutorTest {
     
@@ -53,12 +49,12 @@ public final class LocalTaskExecutorTest {
     public void assertSimpleJob() {
         new LocalTaskExecutor(new LocalCloudJobConfiguration(new SimpleJobConfiguration(JobCoreConfiguration
                 .newBuilder(TestSimpleJob.class.getSimpleName(), "*/2 * * * * ?", 3).build(), TestSimpleJob.class.getName()), 1)).execute();
-        assertThat(TestSimpleJob.getShardingContext().getJobName(), is(TestSimpleJob.class.getSimpleName()));
-        assertThat(TestSimpleJob.getShardingContext().getShardingItem(), is(1));
-        assertThat(TestSimpleJob.getShardingContext().getShardingTotalCount(), is(3));
-        assertThat(TestSimpleJob.getShardingContext().getShardingItem(), is(1));
-        assertNull(TestSimpleJob.getShardingContext().getShardingParameter());
-        assertThat(TestSimpleJob.getShardingContext().getJobParameter(), is(""));
+        Assert.assertThat(TestSimpleJob.getShardingContext().getJobName(), Is.is(TestSimpleJob.class.getSimpleName()));
+        Assert.assertThat(TestSimpleJob.getShardingContext().getShardingItem(), Is.is(1));
+        Assert.assertThat(TestSimpleJob.getShardingContext().getShardingTotalCount(), Is.is(3));
+        Assert.assertThat(TestSimpleJob.getShardingContext().getShardingItem(), Is.is(1));
+        Assert.assertNull(TestSimpleJob.getShardingContext().getShardingParameter());
+        Assert.assertThat(TestSimpleJob.getShardingContext().getJobParameter(), Is.is(""));
     }
     
     @Test
@@ -66,12 +62,12 @@ public final class LocalTaskExecutorTest {
         new LocalTaskExecutor(new LocalCloudJobConfiguration(new SimpleJobConfiguration(JobCoreConfiguration.newBuilder(
                 TestSimpleJob.class.getSimpleName(), "*/2 * * * * ?", 3).shardingItemParameters("0=Beijing,1=Shanghai,2=Guangzhou").jobParameter("dbName=dangdang").build(), 
                 TestSimpleJob.class.getName()), 1, "testSimpleJob", "applicationContext.xml")).execute();
-        assertThat(TestSimpleJob.getShardingContext().getJobName(), is(TestSimpleJob.class.getSimpleName()));
-        assertThat(TestSimpleJob.getShardingContext().getShardingTotalCount(), is(3));
-        assertThat(TestSimpleJob.getShardingContext().getJobParameter(), is("dbName=dangdang"));
-        assertThat(TestSimpleJob.getShardingContext().getShardingItem(), is(1));
-        assertThat(TestSimpleJob.getShardingParameters().size(), is(1));
-        assertThat(TestSimpleJob.getShardingParameters().iterator().next(), is("Shanghai"));
+        Assert.assertThat(TestSimpleJob.getShardingContext().getJobName(), Is.is(TestSimpleJob.class.getSimpleName()));
+        Assert.assertThat(TestSimpleJob.getShardingContext().getShardingTotalCount(), Is.is(3));
+        Assert.assertThat(TestSimpleJob.getShardingContext().getJobParameter(), Is.is("dbName=dangdang"));
+        Assert.assertThat(TestSimpleJob.getShardingContext().getShardingItem(), Is.is(1));
+        Assert.assertThat(TestSimpleJob.getShardingParameters().size(), Is.is(1));
+        Assert.assertThat(TestSimpleJob.getShardingParameters().iterator().next(), Is.is("Shanghai"));
     }
     
     @Test
@@ -79,9 +75,9 @@ public final class LocalTaskExecutorTest {
         TestDataflowJob.setInput(Arrays.asList("1", "2", "3"));
         new LocalTaskExecutor(new LocalCloudJobConfiguration(new DataflowJobConfiguration(JobCoreConfiguration
                 .newBuilder(TestDataflowJob.class.getSimpleName(), "*/2 * * * * ?", 10).build(), TestDataflowJob.class.getName(), false), 5)).execute();
-        assertFalse(TestDataflowJob.getOutput().isEmpty());
+        Assert.assertFalse(TestDataflowJob.getOutput().isEmpty());
         for (String each : TestDataflowJob.getOutput()) {
-            assertTrue(each.endsWith("-d"));
+            Assert.assertTrue(each.endsWith("-d"));
         }
     }
     

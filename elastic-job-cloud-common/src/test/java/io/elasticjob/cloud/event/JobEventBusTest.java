@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +13,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.event;
@@ -23,17 +23,15 @@ import io.elasticjob.cloud.event.fixture.TestJobEventConfiguration;
 import io.elasticjob.cloud.event.fixture.TestJobEventListener;
 import io.elasticjob.cloud.event.type.JobExecutionEvent;
 import io.elasticjob.cloud.event.fixture.TestJobEventFailureConfiguration;
+import org.hamcrest.core.Is;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.unitils.util.ReflectionUtils;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public final class JobEventBusTest {
@@ -60,7 +58,7 @@ public final class JobEventBusTest {
         while (!TestJobEventListener.isExecutionEventCalled()) {
             Thread.sleep(100L);
         }
-        verify(jobEventCaller).call();
+        Mockito.verify(jobEventCaller).call();
     }
     
     @Test
@@ -69,10 +67,10 @@ public final class JobEventBusTest {
         assertIsRegistered(false);
         ReflectionUtils.setFieldValue(jobEventBus, "eventBus", eventBus);
         jobEventBus.post(new JobExecutionEvent("fake_task_id", "test_event_bus_job", JobExecutionEvent.ExecutionSource.NORMAL_TRIGGER, 0));
-        verify(eventBus, times(0)).post(ArgumentMatchers.<JobEvent>any());
+        Mockito.verify(eventBus, Mockito.times(0)).post(ArgumentMatchers.<JobEvent>any());
     }
     
     private void assertIsRegistered(final boolean actual) throws NoSuchFieldException {
-        assertThat((boolean) ReflectionUtils.getFieldValue(jobEventBus, JobEventBus.class.getDeclaredField("isRegistered")), is(actual));
+        Assert.assertThat((boolean) ReflectionUtils.getFieldValue(jobEventBus, JobEventBus.class.getDeclaredField("isRegistered")), Is.is(actual));
     }
 }

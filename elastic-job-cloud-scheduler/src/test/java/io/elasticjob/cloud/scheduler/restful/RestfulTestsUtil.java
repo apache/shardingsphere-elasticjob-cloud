@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +13,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.scheduler.restful;
@@ -24,7 +24,14 @@ import org.eclipse.jetty.io.ByteArrayBuffer;
 import javax.ws.rs.core.MediaType;
 
 public class RestfulTestsUtil {
-    
+
+    /**
+     * Send request.
+     * @param url the url
+     * @param method the method name
+     * @return http status code
+     * @throws Exception exception when error
+     */
     public static int sentRequest(final String url, final String method) throws Exception {
         HttpClient httpClient = new HttpClient();
         try {
@@ -39,7 +46,15 @@ public class RestfulTestsUtil {
             httpClient.stop();
         }
     }
-    
+
+    /**
+     * Send request.
+     * @param url the url
+     * @param method the method name
+     * @param content the content
+     * @return the http status code
+     * @throws Exception exception when error
+     */
     public static int sentRequest(final String url, final String method, final String content) throws Exception {
         HttpClient httpClient = new HttpClient();
         try {
@@ -57,7 +72,13 @@ public class RestfulTestsUtil {
             httpClient.stop();
         }
     }
-    
+
+    /**
+     * Send get request.
+     * @param url the url
+     * @return the http response
+     * @throws Exception exception when error
+     */
     public static String sentGetRequest(final String url) throws Exception {
         HttpClient httpClient = new HttpClient();
         try {
