@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +13,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.scheduler.config.job;
@@ -28,9 +28,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CloudJobConfigurationNode {
     
-    public static final String ROOT =  "/config/job";
+    public static final String ROOT = "/config/job";
     
-    private static final String JOB_CONFIG =  ROOT + "/%s";
+    private static final String JOB_CONFIG = ROOT + "/%s";
     
     static String getRootNodePath(final String jobName) {
         return String.format(JOB_CONFIG, jobName);

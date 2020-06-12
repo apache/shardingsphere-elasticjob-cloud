@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +13,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.util.json;
@@ -135,7 +135,7 @@ public abstract class AbstractJobConfigurationGsonTypeAdapter<T extends JobRootC
         return result;
     }
     
-    protected abstract void addToCustomizedValueMap(final String jsonName, final JsonReader in, final Map<String, Object> customizedValueMap) throws IOException;
+    protected abstract void addToCustomizedValueMap(String jsonName, JsonReader in, Map<String, Object> customizedValueMap) throws IOException;
     
     private JobCoreConfiguration getJobCoreConfiguration(final String jobName, final String cron, final int shardingTotalCount,
                                                          final String shardingItemParameters, final String jobParameter, final boolean failover,
@@ -165,7 +165,7 @@ public abstract class AbstractJobConfigurationGsonTypeAdapter<T extends JobRootC
         }
     }
     
-    protected abstract T getJobRootConfiguration(final JobTypeConfiguration typeConfig, final Map<String, Object> customizedValueMap);
+    protected abstract T getJobRootConfiguration(JobTypeConfiguration typeConfig, Map<String, Object> customizedValueMap);
     
     @Override
     public void write(final JsonWriter out, final T value) throws IOException {
@@ -192,5 +192,5 @@ public abstract class AbstractJobConfigurationGsonTypeAdapter<T extends JobRootC
         out.endObject();
     }
     
-    protected abstract void writeCustomized(final JsonWriter out, final T value) throws IOException;
+    protected abstract void writeCustomized(JsonWriter out, T value) throws IOException;
 }

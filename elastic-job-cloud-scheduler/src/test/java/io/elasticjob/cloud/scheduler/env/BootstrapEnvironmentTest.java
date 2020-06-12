@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +13,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.scheduler.env;
@@ -21,16 +21,14 @@ import io.elasticjob.cloud.event.rdb.JobEventRdbConfiguration;
 import io.elasticjob.cloud.reg.zookeeper.ZookeeperConfiguration;
 import com.google.common.base.Optional;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.hamcrest.core.Is;
+import org.hamcrest.core.IsInstanceOf;
+import org.junit.Assert;
 import org.junit.Test;
 import org.unitils.util.ReflectionUtils;
 
 import java.util.Map;
 import java.util.Properties;
-
-import static junit.framework.TestCase.assertFalse;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
-import static org.junit.Assert.assertThat;
 
 public final class BootstrapEnvironmentTest {
     
@@ -39,9 +37,9 @@ public final class BootstrapEnvironmentTest {
     @Test
     public void assertGetMesosConfiguration() throws NoSuchFieldException {
         MesosConfiguration mesosConfig = bootstrapEnvironment.getMesosConfiguration();
-        assertThat(mesosConfig.getHostname(), is("localhost"));
-        assertThat(mesosConfig.getUser(), is(""));
-        assertThat(mesosConfig.getUrl(), is("zk://localhost:2181/mesos"));
+        Assert.assertThat(mesosConfig.getHostname(), Is.is("localhost"));
+        Assert.assertThat(mesosConfig.getUser(), Is.is(""));
+        Assert.assertThat(mesosConfig.getUrl(), Is.is("zk://localhost:2181/mesos"));
     }
     
     @Test
@@ -50,21 +48,21 @@ public final class BootstrapEnvironmentTest {
         properties.setProperty(BootstrapEnvironment.EnvironmentArgument.ZOOKEEPER_DIGEST.getKey(), "test");
         ReflectionUtils.setFieldValue(bootstrapEnvironment, "properties", properties);
         ZookeeperConfiguration zkConfig = bootstrapEnvironment.getZookeeperConfiguration();
-        assertThat(zkConfig.getServerLists(), is("localhost:2181"));
-        assertThat(zkConfig.getNamespace(), is("elastic-job-cloud"));
-        assertThat(zkConfig.getDigest(), is("test"));
+        Assert.assertThat(zkConfig.getServerLists(), Is.is("localhost:2181"));
+        Assert.assertThat(zkConfig.getNamespace(), Is.is("elastic-job-cloud"));
+        Assert.assertThat(zkConfig.getDigest(), Is.is("test"));
     }
     
     @Test
     public void assertGetRestfulServerConfiguration() {
         RestfulServerConfiguration restfulServerConfig = bootstrapEnvironment.getRestfulServerConfiguration();
-        assertThat(restfulServerConfig.getPort(), is(8899));
+        Assert.assertThat(restfulServerConfig.getPort(), Is.is(8899));
     }
     
     @Test
     public void assertGetFrameworkConfiguration() {
         FrameworkConfiguration frameworkConfig = bootstrapEnvironment.getFrameworkConfiguration();
-        assertThat(frameworkConfig.getJobStateQueueSize(), is(10000));
+        Assert.assertThat(frameworkConfig.getJobStateQueueSize(), Is.is(10000));
     }
     
     @Test
@@ -77,13 +75,13 @@ public final class BootstrapEnvironmentTest {
         ReflectionUtils.setFieldValue(bootstrapEnvironment, "properties", properties);
         Optional<JobEventRdbConfiguration> jobEventRdbConfiguration = bootstrapEnvironment.getJobEventRdbConfiguration();
         if (jobEventRdbConfiguration.isPresent()) {
-            assertThat(jobEventRdbConfiguration.get().getDataSource(), instanceOf(BasicDataSource.class));
+            Assert.assertThat(jobEventRdbConfiguration.get().getDataSource(), IsInstanceOf.instanceOf(BasicDataSource.class));
         }
     }
     
     @Test
     public void assertWithoutEventTraceRdbConfiguration() throws NoSuchFieldException {
-        assertFalse(bootstrapEnvironment.getJobEventRdbConfiguration().isPresent());
+        Assert.assertFalse(bootstrapEnvironment.getJobEventRdbConfiguration().isPresent());
     }
     
     @Test
@@ -95,22 +93,22 @@ public final class BootstrapEnvironmentTest {
         properties.setProperty(BootstrapEnvironment.EnvironmentArgument.EVENT_TRACE_RDB_PASSWORD.getKey(), "password");
         ReflectionUtils.setFieldValue(bootstrapEnvironment, "properties", properties);
         Map<String, String> jobEventRdbConfigurationMap = bootstrapEnvironment.getJobEventRdbConfigurationMap();
-        assertThat(jobEventRdbConfigurationMap.get(BootstrapEnvironment.EnvironmentArgument.EVENT_TRACE_RDB_DRIVER.getKey()), is("org.h2.Driver"));
-        assertThat(jobEventRdbConfigurationMap.get(BootstrapEnvironment.EnvironmentArgument.EVENT_TRACE_RDB_URL.getKey()), is("jdbc:h2:mem:job_event_trace"));
-        assertThat(jobEventRdbConfigurationMap.get(BootstrapEnvironment.EnvironmentArgument.EVENT_TRACE_RDB_USERNAME.getKey()), is("sa"));
-        assertThat(jobEventRdbConfigurationMap.get(BootstrapEnvironment.EnvironmentArgument.EVENT_TRACE_RDB_PASSWORD.getKey()), is("password"));
+        Assert.assertThat(jobEventRdbConfigurationMap.get(BootstrapEnvironment.EnvironmentArgument.EVENT_TRACE_RDB_DRIVER.getKey()), Is.is("org.h2.Driver"));
+        Assert.assertThat(jobEventRdbConfigurationMap.get(BootstrapEnvironment.EnvironmentArgument.EVENT_TRACE_RDB_URL.getKey()), Is.is("jdbc:h2:mem:job_event_trace"));
+        Assert.assertThat(jobEventRdbConfigurationMap.get(BootstrapEnvironment.EnvironmentArgument.EVENT_TRACE_RDB_USERNAME.getKey()), Is.is("sa"));
+        Assert.assertThat(jobEventRdbConfigurationMap.get(BootstrapEnvironment.EnvironmentArgument.EVENT_TRACE_RDB_PASSWORD.getKey()), Is.is("password"));
     }
     
     @Test
     public void assertReconcileConfiguration() throws NoSuchFieldException {
         FrameworkConfiguration configuration = bootstrapEnvironment.getFrameworkConfiguration();
-        assertThat(configuration.getReconcileIntervalMinutes(), is(-1));
-        assertFalse(configuration.isEnabledReconcile());
+        Assert.assertThat(configuration.getReconcileIntervalMinutes(), Is.is(-1));
+        Assert.assertFalse(configuration.isEnabledReconcile());
         Properties properties = new Properties();
         properties.setProperty(BootstrapEnvironment.EnvironmentArgument.RECONCILE_INTERVAL_MINUTES.getKey(), "0");
         ReflectionUtils.setFieldValue(bootstrapEnvironment, "properties", properties);
         configuration = bootstrapEnvironment.getFrameworkConfiguration();
-        assertThat(configuration.getReconcileIntervalMinutes(), is(0));
-        assertFalse(configuration.isEnabledReconcile());
+        Assert.assertThat(configuration.getReconcileIntervalMinutes(), Is.is(0));
+        Assert.assertFalse(configuration.isEnabledReconcile());
     }
 }

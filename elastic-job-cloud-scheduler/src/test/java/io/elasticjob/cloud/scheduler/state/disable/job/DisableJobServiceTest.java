@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,22 +13,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.scheduler.state.disable.job;
 
 import io.elasticjob.cloud.reg.base.CoordinatorRegistryCenter;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public final class DisableJobServiceTest {
@@ -45,27 +42,27 @@ public final class DisableJobServiceTest {
     @Test
     public void assertAdd() {
         disableJobService.add("test_job");
-        verify(regCenter).isExisted("/state/disable/job/test_job");
-        verify(regCenter).persist("/state/disable/job/test_job", "test_job");
+        Mockito.verify(regCenter).isExisted("/state/disable/job/test_job");
+        Mockito.verify(regCenter).persist("/state/disable/job/test_job", "test_job");
     }
     
     @Test
     public void assertRemove() {
         disableJobService.remove("test_job");
-        verify(regCenter).remove("/state/disable/job/test_job");
+        Mockito.verify(regCenter).remove("/state/disable/job/test_job");
     }
     
     @Test
     public void assertIsDisabled() {
-        when(regCenter.isExisted("/state/disable/job/test_job")).thenReturn(true);
-        assertTrue(disableJobService.isDisabled("test_job"));
-        verify(regCenter).isExisted("/state/disable/job/test_job");
+        Mockito.when(regCenter.isExisted("/state/disable/job/test_job")).thenReturn(true);
+        Assert.assertTrue(disableJobService.isDisabled("test_job"));
+        Mockito.verify(regCenter).isExisted("/state/disable/job/test_job");
     }
     
     @Test
     public void assertIsEnabled() {
-        when(regCenter.isExisted("/state/disable/job/test_job")).thenReturn(false);
-        assertFalse(disableJobService.isDisabled("test_job"));
-        verify(regCenter).isExisted("/state/disable/job/test_job");
+        Mockito.when(regCenter.isExisted("/state/disable/job/test_job")).thenReturn(false);
+        Assert.assertFalse(disableJobService.isDisabled("test_job"));
+        Mockito.verify(regCenter).isExisted("/state/disable/job/test_job");
     }
 }

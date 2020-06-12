@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,7 +13,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.config;
@@ -20,12 +20,9 @@ package io.elasticjob.cloud.config;
 import io.elasticjob.cloud.executor.handler.impl.DefaultJobExceptionHandler;
 import io.elasticjob.cloud.fixture.handler.IgnoreJobExceptionHandler;
 import io.elasticjob.cloud.executor.handler.JobProperties;
+import org.hamcrest.core.Is;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public final class JobCoreConfigurationTest {
     
@@ -35,12 +32,12 @@ public final class JobCoreConfigurationTest {
                 .shardingItemParameters("0=a,1=b,2=c").jobParameter("param").failover(true).misfire(false).description("desc")
                 .jobProperties("job_exception_handler", IgnoreJobExceptionHandler.class.getName()).build();
         assertRequiredProperties(actual);
-        assertThat(actual.getShardingItemParameters(), is("0=a,1=b,2=c"));
-        assertThat(actual.getJobParameter(), is("param"));
-        assertTrue(actual.isFailover());
-        assertFalse(actual.isMisfire());
-        assertThat(actual.getDescription(), is("desc"));
-        assertThat(actual.getJobProperties().get(JobProperties.JobPropertiesEnum.JOB_EXCEPTION_HANDLER), is(IgnoreJobExceptionHandler.class.getName()));
+        Assert.assertThat(actual.getShardingItemParameters(), Is.is("0=a,1=b,2=c"));
+        Assert.assertThat(actual.getJobParameter(), Is.is("param"));
+        Assert.assertTrue(actual.isFailover());
+        Assert.assertFalse(actual.isMisfire());
+        Assert.assertThat(actual.getDescription(), Is.is("desc"));
+        Assert.assertThat(actual.getJobProperties().get(JobProperties.JobPropertiesEnum.JOB_EXCEPTION_HANDLER), Is.is(IgnoreJobExceptionHandler.class.getName()));
     }
     
     @Test
@@ -59,18 +56,18 @@ public final class JobCoreConfigurationTest {
     }
     
     private void assertRequiredProperties(final JobCoreConfiguration actual) {
-        assertThat(actual.getJobName(), is("test_job"));
-        assertThat(actual.getCron(), is("0/1 * * * * ?"));
-        assertThat(actual.getShardingTotalCount(), is(3));
+        Assert.assertThat(actual.getJobName(), Is.is("test_job"));
+        Assert.assertThat(actual.getCron(), Is.is("0/1 * * * * ?"));
+        Assert.assertThat(actual.getShardingTotalCount(), Is.is(3));
     }
     
     private void assertDefaultValues(final JobCoreConfiguration actual) {
-        assertThat(actual.getShardingItemParameters(), is(""));
-        assertThat(actual.getJobParameter(), is(""));
-        assertFalse(actual.isFailover());
-        assertTrue(actual.isMisfire());
-        assertThat(actual.getDescription(), is(""));
-        assertThat(actual.getJobProperties().get(JobProperties.JobPropertiesEnum.JOB_EXCEPTION_HANDLER), is(DefaultJobExceptionHandler.class.getName()));
+        Assert.assertThat(actual.getShardingItemParameters(), Is.is(""));
+        Assert.assertThat(actual.getJobParameter(), Is.is(""));
+        Assert.assertFalse(actual.isFailover());
+        Assert.assertTrue(actual.isMisfire());
+        Assert.assertThat(actual.getDescription(), Is.is(""));
+        Assert.assertThat(actual.getJobProperties().get(JobProperties.JobPropertiesEnum.JOB_EXCEPTION_HANDLER), Is.is(DefaultJobExceptionHandler.class.getName()));
     }
     
     @Test(expected = IllegalArgumentException.class)

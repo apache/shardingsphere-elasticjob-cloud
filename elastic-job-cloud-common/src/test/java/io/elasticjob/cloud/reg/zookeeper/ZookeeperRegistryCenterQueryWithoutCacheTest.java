@@ -1,9 +1,10 @@
 /*
- * Copyright 1999-2015 dangdang.com.
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -12,25 +13,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * </p>
  */
 
 package io.elasticjob.cloud.reg.zookeeper;
 
 import io.elasticjob.cloud.fixture.EmbedTestingServer;
 import io.elasticjob.cloud.reg.zookeeper.util.ZookeeperRegistryCenterTestUtil;
+import org.hamcrest.core.Is;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.Collections;
-
-import static junit.framework.TestCase.assertNull;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public final class ZookeeperRegistryCenterQueryWithoutCacheTest {
     
@@ -56,44 +51,44 @@ public final class ZookeeperRegistryCenterQueryWithoutCacheTest {
     
     @Test
     public void assertGetFromServer() {
-        assertThat(zkRegCenter.get("/test"), is("test"));
-        assertThat(zkRegCenter.get("/test/deep/nested"), is("deepNested"));
+        Assert.assertThat(zkRegCenter.get("/test"), Is.is("test"));
+        Assert.assertThat(zkRegCenter.get("/test/deep/nested"), Is.is("deepNested"));
     }
     
     @Test
     public void assertGetChildrenKeys() {
-        assertThat(zkRegCenter.getChildrenKeys("/test"), is(Arrays.asList("deep", "child")));
-        assertThat(zkRegCenter.getChildrenKeys("/test/deep"), is(Collections.singletonList("nested")));
-        assertThat(zkRegCenter.getChildrenKeys("/test/child"), is(Collections.<String>emptyList()));
-        assertThat(zkRegCenter.getChildrenKeys("/test/notExisted"), is(Collections.<String>emptyList()));
+        Assert.assertThat(zkRegCenter.getChildrenKeys("/test"), Is.is(Arrays.asList("deep", "child")));
+        Assert.assertThat(zkRegCenter.getChildrenKeys("/test/deep"), Is.is(Collections.singletonList("nested")));
+        Assert.assertThat(zkRegCenter.getChildrenKeys("/test/child"), Is.is(Collections.<String>emptyList()));
+        Assert.assertThat(zkRegCenter.getChildrenKeys("/test/notExisted"), Is.is(Collections.<String>emptyList()));
     }
     
     @Test
     public void assertGetNumChildren() {
-        assertThat(zkRegCenter.getNumChildren("/test"), is(2));
-        assertThat(zkRegCenter.getNumChildren("/test/deep"), is(1));
-        assertThat(zkRegCenter.getNumChildren("/test/child"), is(0));
-        assertThat(zkRegCenter.getNumChildren("/test/notExisted"), is(0));
+        Assert.assertThat(zkRegCenter.getNumChildren("/test"), Is.is(2));
+        Assert.assertThat(zkRegCenter.getNumChildren("/test/deep"), Is.is(1));
+        Assert.assertThat(zkRegCenter.getNumChildren("/test/child"), Is.is(0));
+        Assert.assertThat(zkRegCenter.getNumChildren("/test/notExisted"), Is.is(0));
     }
     
     @Test
     public void assertIsExisted() {
-        assertTrue(zkRegCenter.isExisted("/test"));
-        assertTrue(zkRegCenter.isExisted("/test/deep/nested"));
-        assertFalse(zkRegCenter.isExisted("/notExisted"));
+        Assert.assertTrue(zkRegCenter.isExisted("/test"));
+        Assert.assertTrue(zkRegCenter.isExisted("/test/deep/nested"));
+        Assert.assertFalse(zkRegCenter.isExisted("/notExisted"));
     }
     
     @Test
     public void assertGetRegistryCenterTime() {
         long regCenterTime = zkRegCenter.getRegistryCenterTime("/_systemTime/current");
-        assertTrue(regCenterTime <= System.currentTimeMillis());
+        Assert.assertTrue(regCenterTime <= System.currentTimeMillis());
         long updatedRegCenterTime = zkRegCenter.getRegistryCenterTime("/_systemTime/current");
         System.out.println(regCenterTime + "," + updatedRegCenterTime);
-        assertTrue(regCenterTime < updatedRegCenterTime);
+        Assert.assertTrue(regCenterTime < updatedRegCenterTime);
     }
 
     @Test
     public void assertGetWithoutNode() {
-        assertNull(zkRegCenter.get("/notExisted"));
+        Assert.assertNull(zkRegCenter.get("/notExisted"));
     }
 }
