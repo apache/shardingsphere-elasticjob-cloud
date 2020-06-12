@@ -13,7 +13,7 @@ next = "/03-design"
 
 ## 配置
 
-使用`io.elasticjob.cloud.executor.local.LocalCloudJobConfiguration`配置本地作业。
+使用`org.apache.shardingsphere.elasticjob.cloud.executor.local.LocalCloudJobConfiguration`配置本地作业。
 
 ```java
 LocalCloudJobConfiguration config = new LocalCloudJobConfiguration(
@@ -30,7 +30,7 @@ LocalCloudJobConfiguration config = new LocalCloudJobConfiguration(
 
 ## 运行
 
-使用`io.elasticjob.cloud.executor.local.LocalTaskExecutor`运行作业。
+使用`org.apache.shardingsphere.elasticjob.cloud.executor.local.LocalTaskExecutor`运行作业。
 
 ```java
 new LocalTaskExecutor(localJobConfig).execute();

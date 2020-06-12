@@ -54,7 +54,7 @@ Elastic-Job-Lite and Elastic-Job-Cloud provide unified API. Developers only need
 ```xml
 <!-- import elastic-job cloud executor -->
 <dependency>
-    <groupId>io.elasticjob</groupId>
+    <groupId>org.apache.shardingsphere.elasticjob</groupId>
     <artifactId>elastic-job-cloud-executor</artifactId>
     <version>${lasted.release.version}</version>
 </dependency>
