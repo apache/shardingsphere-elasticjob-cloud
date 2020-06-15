@@ -43,10 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 本地作业执行器.
- * 
- * @author gaohongtao
- * @author zhangliang
+ * Task executor.
  */
 @RequiredArgsConstructor
 public final class LocalTaskExecutor {
@@ -54,7 +51,7 @@ public final class LocalTaskExecutor {
     private final LocalCloudJobConfiguration localCloudJobConfiguration;
     
     /**
-     * 本地执行作业.
+     * Execute job.
      */
     @SuppressWarnings("unchecked")
     public void execute() {

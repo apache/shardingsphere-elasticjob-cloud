@@ -40,9 +40,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
 /**
- * 作业任务执行器.
- *
- * @author zhangliang
+ * Task executor.
  */
 @Slf4j
 public final class TaskExecutor implements Executor {

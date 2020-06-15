@@ -24,18 +24,13 @@ import org.apache.mesos.MesosExecutorDriver;
 import org.apache.mesos.Protos;
 
 /**
- * 云作业启动器.
- * 
- * <p>需将应用打包, 并在main方法中直接调用Bootstrap.execute方法</p>
- *
- * @author caohao
- * @author zhangliang
+ * Job bootstrap.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class JobBootstrap {
     
     /**
-     * 执行作业.
+     * Execute.
      */
     public static void execute() {
         MesosExecutorDriver driver = new MesosExecutorDriver(new TaskExecutor());
