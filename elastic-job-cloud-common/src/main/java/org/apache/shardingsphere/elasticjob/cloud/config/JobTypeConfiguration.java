@@ -20,31 +20,28 @@ package org.apache.shardingsphere.elasticjob.cloud.config;
 import org.apache.shardingsphere.elasticjob.cloud.api.JobType;
 
 /**
- * 作业类型配置.
- * 
- * @author caohao
- * @author zhangliang
+ * Job type configuration.
  */
 public interface JobTypeConfiguration {
-    
+
     /**
-     * 获取作业类型.
-     * 
-     * @return 作业类型
+     * Get job type.
+     *
+     * @return job type
      */
     JobType getJobType();
-    
+
     /**
-     * 获取作业实现类名称.
+     * Get job class name.
      *
-     * @return 作业实现类名称
+     * @return job class name
      */
     String getJobClass();
-    
+
     /**
-     * 获取作业核心配置.
-     * 
-     * @return 作业核心配置
+     * Get job core configuration.
+     *
+     * @return job core configuration
      */
     JobCoreConfiguration getCoreConfig();
 }

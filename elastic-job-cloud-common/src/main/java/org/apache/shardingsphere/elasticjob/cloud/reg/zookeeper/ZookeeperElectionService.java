@@ -27,10 +27,7 @@ import org.apache.curator.framework.recipes.leader.LeaderSelectorListenerAdapter
 import java.util.concurrent.CountDownLatch;
 
 /**
- * 使用{@link LeaderSelector}实现选举服务.
- * 
- * @author gaohongtao
- * @author caohao
+ * Use {@link LeaderSelector} to implement election service.
  */
 @Slf4j
 public final class ZookeeperElectionService {
@@ -59,17 +56,17 @@ public final class ZookeeperElectionService {
         leaderSelector.autoRequeue();
         leaderSelector.setId(identity);
     }
-    
+
     /**
-     * 开始选举.
+     * Start election.
      */
     public void start() {
         log.debug("Elastic job: {} start to elect leadership", leaderSelector.getId());
         leaderSelector.start();
     }
-    
+
     /**
-     * 停止选举.
+     * Stop election.
      */
     public void stop() {
         log.info("Elastic job: stop leadership election");

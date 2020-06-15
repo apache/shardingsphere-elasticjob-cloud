@@ -20,9 +20,7 @@ package org.apache.shardingsphere.elasticjob.cloud.event.rdb;
 import org.apache.shardingsphere.elasticjob.cloud.event.JobEventIdentity;
 
 /**
- * 关系型数据库作业事件标识.
- *
- * @author zhangliang
+ * Job event RDB identity.
  */
 public class JobEventRdbIdentity implements JobEventIdentity {
     

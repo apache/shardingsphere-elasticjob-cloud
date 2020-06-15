@@ -33,10 +33,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * 任务运行时上下文.
- *
- * @author zhangliang
- * @author caohao
+ * Task runtime context.
  */
 @Getter
 @EqualsAndHashCode(of = "id")
@@ -75,60 +72,60 @@ public final class TaskContext {
         this.type = type;
         this.slaveId = slaveId;
     }
-    
+
     /**
-     * 根据任务主键获取任务上下文.
+     * Get task context via task ID.
      *
-     * @param id 任务主键
-     * @return 任务上下文
+     * @param id task ID
+     * @return task context
      */
     public static TaskContext from(final String id) {
         String[] result = id.split(DELIMITER);
         Preconditions.checkState(5 == result.length);
         return new TaskContext(id, MetaInfo.from(result[0] + DELIMITER + result[1]), ExecutionType.valueOf(result[2]), result[3]);
     }
-    
+
     /**
-     * 获取未分配执行服务器前的任务主键.
+     * Get unassigned task ID before job execute.
      *
-     * @param id 任务主键
-     * @return 未分配执行服务器前的任务主键
+     * @param id task ID
+     * @return unassigned task ID before job execute
      */
     public static String getIdForUnassignedSlave(final String id) {
         return id.replaceAll(TaskContext.from(id).getSlaveId(), UNASSIGNED_SLAVE_ID);
     }
-    
+
     /**
-     * 设置任务执行服务器主键.
-     * 
-     * @param slaveId 任务执行服务器主键
+     * Set job server ID.
+     *
+     * @param slaveId job server ID
      */
     public void setSlaveId(final String slaveId) {
         id = id.replaceAll(this.slaveId, slaveId);
         this.slaveId = slaveId;
     }
-    
+
     /**
-     * 获取任务名称.
+     * Get task name.
      *
-     * @return 任务名称
+     * @return task name
      */
     public String getTaskName() {
         return Joiner.on(DELIMITER).join(metaInfo, type, slaveId);
     }
-    
+
     /**
-     * 获取任务执行器主键.
-     * 
-     * @param appName 应用名称
-     * @return 任务执行器主键
+     * Get executor ID.
+     *
+     * @param appName application name
+     * @return executor ID
      */
     public String getExecutorId(final String appName) {
         return Joiner.on(DELIMITER).join(appName, slaveId);
     }
-    
+
     /**
-     * 任务元信息.
+     * Task meta data.
      */
     @RequiredArgsConstructor
     @Getter
@@ -138,12 +135,12 @@ public final class TaskContext {
         private final String jobName;
         
         private final List<Integer> shardingItems;
-        
+
         /**
-         * 根据任务元信息字符串获取元信息对象.
+         * Get task meta data info via string.
          *
-         * @param value 任务元信息字符串
-         * @return 元信息对象
+         * @param value task meta data info string
+         * @return task meta data info
          */
         public static MetaInfo from(final String value) {
             String[] result = value.split(DELIMITER);

@@ -18,16 +18,14 @@
 package org.apache.shardingsphere.elasticjob.cloud.event;
 
 /**
- * 作业事件标识.
- *
- * @author zhangliang
+ * Job event identity.
  */
 public interface JobEventIdentity {
-    
+
     /**
-     * 获取作业事件标识.
-     * 
-     * @return 作业事件标识
+     * Get identity.
+     *
+     * @return identity
      */
     String getIdentity();
 }

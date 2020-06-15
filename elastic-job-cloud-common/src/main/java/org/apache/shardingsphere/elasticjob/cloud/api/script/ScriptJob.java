@@ -20,9 +20,7 @@ package org.apache.shardingsphere.elasticjob.cloud.api.script;
 import org.apache.shardingsphere.elasticjob.cloud.api.ElasticJob;
 
 /**
- * 脚本分布式作业接口.
- * 
- * @author zhangliang
+ * Script job.
  */
 public interface ScriptJob extends ElasticJob {
 }

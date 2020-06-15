@@ -20,9 +20,7 @@ package org.apache.shardingsphere.elasticjob.cloud.util.env;
 import java.io.IOException;
 
 /**
- * 网络主机异常.
- * 
- * @author zhangliang
+ * Host exception.
  */
 public final class HostException extends RuntimeException {
     

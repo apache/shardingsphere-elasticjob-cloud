@@ -18,16 +18,14 @@
 package org.apache.shardingsphere.elasticjob.cloud.config;
 
 /**
- * 作业配置根接口.
- *
- * @author zhangliang
+ * Job root configuration.
  */
 public interface JobRootConfiguration {
-    
+
     /**
-     * 获取作业类型配置.
-     * 
-     * @return 作业类型配置
+     * Get type Configuration.
+     *
+     * @return Job type configuration
      */
     JobTypeConfiguration getTypeConfig();
 }

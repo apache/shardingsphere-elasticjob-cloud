@@ -18,9 +18,7 @@
 package org.apache.shardingsphere.elasticjob.cloud.api;
 
 /**
- * 弹性化分布式作业标识接口.
- * 
- * @author zhangliang
+ * ElasticJob interface.
  */
 public interface ElasticJob {
 }

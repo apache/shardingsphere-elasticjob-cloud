@@ -27,9 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 分片序列号个性化参数.
- *
- * @author zhangliang
+ * Sharding item parameters.
  */
 @Getter
 public final class ShardingItemParameters {
@@ -68,9 +66,9 @@ public final class ShardingItemParameters {
             throw new JobConfigurationException("Sharding item parameters key '%s' is not an integer.", pair[0]);
         }
     }
-    
+
     /**
-     * 分片项.
+     * Sharding item.
      */
     @AllArgsConstructor
     private static final class ShardingItem {

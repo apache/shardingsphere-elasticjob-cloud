@@ -25,20 +25,16 @@ import org.apache.zookeeper.KeeperException.NoNodeException;
 import org.apache.zookeeper.KeeperException.NodeExistsException;
 
 /**
- * 注册中心异常处理类.
- * 
- * @author zhangliang
+ * Registry center exception handler.
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RegExceptionHandler {
-    
+
     /**
-     * 处理异常.
-     * 
-     * <p>处理掉中断和连接失效异常并继续抛注册中心.</p>
-     * 
-     * @param cause 待处理异常.
+     * Handle exception.
+     *
+     * @param cause exception to be handled
      */
     public static void handleException(final Exception cause) {
         if (null == cause) {

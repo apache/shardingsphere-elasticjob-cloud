@@ -28,9 +28,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * 作业状态痕迹事件.
- *
- * @author caohao
+ * Job status trace event.
  */
 @RequiredArgsConstructor
 @AllArgsConstructor

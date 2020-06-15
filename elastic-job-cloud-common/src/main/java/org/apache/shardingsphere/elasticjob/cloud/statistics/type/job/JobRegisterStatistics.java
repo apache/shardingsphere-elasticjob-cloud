@@ -24,9 +24,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.Date;
 
 /**
- * 作业注册到Cloud平台统计数据.
- *
- * @author liguangyun
+ * Job register statistics.
  */
 @Getter
 @RequiredArgsConstructor
