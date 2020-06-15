@@ -32,9 +32,7 @@ import lombok.Getter;
 import java.util.Map;
 
 /**
- * 内部的作业配置上下文.
- *
- * @author caohao
+ * Job configuration context.
  */
 public final class JobConfigurationContext implements JobRootConfiguration {
     
@@ -72,9 +70,9 @@ public final class JobConfigurationContext implements JobRootConfiguration {
     }
     
     /**
-     * 判断是否为瞬时作业.
-     * 
-     * @return 是否为瞬时作业
+     * Whether is transient job.
+     *
+     * @return true is transient job, otherwise not
      */
     public boolean isTransient() {
         return IGNORE_CRON.equals(jobTypeConfig.getCoreConfig().getCron());

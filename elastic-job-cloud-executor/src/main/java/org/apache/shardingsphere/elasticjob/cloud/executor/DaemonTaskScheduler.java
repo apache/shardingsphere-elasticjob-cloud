@@ -41,10 +41,7 @@ import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 常驻作业调度器.
- * 
- * @author zhangliang
- * @author caohao
+ * Daemon task scheduler.
  */
 @RequiredArgsConstructor
 public final class DaemonTaskScheduler {
@@ -70,7 +67,7 @@ public final class DaemonTaskScheduler {
     private final Protos.TaskID taskId;
     
     /**
-     * 初始化作业.
+     * Init the job.
      */
     public void init() {
         JobDetail jobDetail = JobBuilder.newJob(DaemonJob.class).withIdentity(jobRootConfig.getTypeConfig().getCoreConfig().getJobName()).build();
@@ -121,9 +118,9 @@ public final class DaemonTaskScheduler {
     }
     
     /**
-     * 停止任务调度.
-     * 
-     * @param taskID 任务主键
+     * Shutdown scheduling the task.
+     *
+     * @param taskID task id
      */
     public static void shutdown(final Protos.TaskID taskID) {
         Scheduler scheduler = RUNNING_SCHEDULERS.remove(taskID.getValue());
@@ -137,9 +134,7 @@ public final class DaemonTaskScheduler {
     }
     
     /**
-     * 常驻作业.
-     * 
-     * @author zhangliang
+     * Daemon job.
      */
     public static final class DaemonJob implements Job {
         

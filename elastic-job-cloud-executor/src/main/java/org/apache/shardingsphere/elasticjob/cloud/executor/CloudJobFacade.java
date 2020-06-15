@@ -29,9 +29,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.Collection;
 
 /**
- * 为调度器提供内部服务的门面类.
- * 
- * @author zhangliang
+ * Cloud job facade.
  */
 @RequiredArgsConstructor
 public final class CloudJobFacade implements JobFacade {
@@ -65,7 +63,7 @@ public final class CloudJobFacade implements JobFacade {
 
     /**
      * Get sharding contexts.
-     * @return ShardingContexts
+     * @return sharding contexts
      */
     public ShardingContexts getShardingContexts() {
         return shardingContexts;
