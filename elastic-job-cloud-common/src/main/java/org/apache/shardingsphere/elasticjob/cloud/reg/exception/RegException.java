@@ -18,9 +18,7 @@
 package org.apache.shardingsphere.elasticjob.cloud.reg.exception;
 
 /**
- * 注册中心异常.
- * 
- * @author zhangliang
+ * Registry center exception.
  */
 public final class RegException extends RuntimeException {
     

@@ -23,9 +23,7 @@ import org.apache.shardingsphere.elasticjob.cloud.executor.handler.ExecutorServi
 import java.util.concurrent.ExecutorService;
 
 /**
- * 默认线程池服务处理器.
- * 
- * @author zhangliang
+ * Default executor service handler.
  */
 public final class DefaultExecutorServiceHandler implements ExecutorServiceHandler {
     

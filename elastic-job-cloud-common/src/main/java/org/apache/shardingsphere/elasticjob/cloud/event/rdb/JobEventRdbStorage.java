@@ -37,9 +37,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * 运行痕迹事件数据库存储.
- *
- * @author caohao
+ * Job event RDB storage.
  */
 @Slf4j
 final class JobEventRdbStorage {
@@ -178,7 +176,7 @@ final class JobEventRdbStorage {
             result = true;
         } catch (final SQLException ex) {
             if (!isDuplicateRecord(ex)) {
-                // TODO 记录失败直接输出日志,未来可考虑配置化
+                // TODO log failure directly to output log, consider to be configurable in the future
                 log.error(ex.getMessage());    
             }
         }
@@ -205,7 +203,7 @@ final class JobEventRdbStorage {
             }
             result = true;
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error(ex.getMessage());
         }
         return result;
@@ -234,7 +232,7 @@ final class JobEventRdbStorage {
             if (isDuplicateRecord(ex)) {
                 return updateJobExecutionEventWhenSuccess(jobExecutionEvent);
             }
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error(ex.getMessage());
         }
         return result;
@@ -255,7 +253,7 @@ final class JobEventRdbStorage {
             }
             result = true;
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error(ex.getMessage());
         }
         return result;
@@ -284,7 +282,7 @@ final class JobEventRdbStorage {
             if (isDuplicateRecord(ex)) {
                 return updateJobExecutionEventFailure(jobExecutionEvent);
             }
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error(ex.getMessage());
         }
         return result;
@@ -315,7 +313,7 @@ final class JobEventRdbStorage {
             preparedStatement.execute();
             result = true;
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error(ex.getMessage());
         }
         return result;
@@ -333,7 +331,7 @@ final class JobEventRdbStorage {
                 return resultSet.getString("original_task_id");
             }
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error(ex.getMessage());
         }
         return result;
@@ -358,7 +356,7 @@ final class JobEventRdbStorage {
                 result.add(jobStatusTraceEvent);
             }
         } catch (final SQLException | ParseException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error(ex.getMessage());
         }
         return result;

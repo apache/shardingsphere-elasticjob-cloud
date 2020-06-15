@@ -38,9 +38,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * 统计信息数据仓库，基于数据库.
- *
- * @author liguangyun
+ * Statistic RDB repository.
  */
 @Slf4j
 public class StatisticRdbRepository {
@@ -54,13 +52,7 @@ public class StatisticRdbRepository {
     private static final String TABLE_JOB_REGISTER_STATISTICS = "JOB_REGISTER_STATISTICS";
     
     private final DataSource dataSource;
-    
-    /**
-     * 构造函数.
-     * 
-     * @param dataSource 数据源
-     * @throws SQLException SQL异常
-     */
+
     public StatisticRdbRepository(final DataSource dataSource) throws SQLException {
         this.dataSource = dataSource;
         initTables();
@@ -161,12 +153,12 @@ public class StatisticRdbRepository {
             preparedStatement.execute();
         }
     }
-    
+
     /**
-     * 添加任务运行结果统计数据.
-     * 
-     * @param taskResultStatistics 任务运行结果统计数据对象
-     * @return 添加操作是否成功
+     * Add task result statistics.
+     *
+     * @param taskResultStatistics task result statistics
+     * @return add success or not
      */
     public boolean add(final TaskResultStatistics taskResultStatistics) {
         boolean result = false;
@@ -182,17 +174,17 @@ public class StatisticRdbRepository {
             preparedStatement.execute();
             result = true;
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Insert taskResultStatistics to DB error:", ex);
         }
         return result;
     }
-    
+
     /**
-     * 添加运行中的任务统计数据.
-     * 
-     * @param taskRunningStatistics 运行中的任务统计数据对象
-     * @return 添加操作是否成功
+     * Add task running statistics.
+     *
+     * @param taskRunningStatistics task running statistics
+     * @return add success or not
      */
     public boolean add(final TaskRunningStatistics taskRunningStatistics) {
         boolean result = false;
@@ -206,17 +198,17 @@ public class StatisticRdbRepository {
             preparedStatement.execute();
             result = true;
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Insert taskRunningStatistics to DB error:", ex);
         }
         return result;
     }
-    
+
     /**
-     * 添加运行中的作业统计数据.
-     * 
-     * @param jobRunningStatistics 运行中的作业统计数据对象
-     * @return 添加操作是否成功
+     * Add job running statistics.
+     *
+     * @param jobRunningStatistics job running statistics
+     * @return add success or not
      */
     public boolean add(final JobRunningStatistics jobRunningStatistics) {
         boolean result = false;
@@ -230,17 +222,17 @@ public class StatisticRdbRepository {
             preparedStatement.execute();
             result = true;
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Insert jobRunningStatistics to DB error:", ex);
         }
         return result;
     }
-    
+
     /**
-     * 添加作业注册统计数据.
-     * 
-     * @param jobRegisterStatistics 作业注册统计数据对象
-     * @return 添加操作是否成功
+     * Add job register statistics.
+     *
+     * @param jobRegisterStatistics job register statistics
+     * @return add success or not
      */
     public boolean add(final JobRegisterStatistics jobRegisterStatistics) {
         boolean result = false;
@@ -254,18 +246,18 @@ public class StatisticRdbRepository {
             preparedStatement.execute();
             result = true;
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Insert jobRegisterStatistics to DB error:", ex);
         }
         return result;
     }
-    
+
     /**
-     * 获取任务运行结果统计数据集合.
-     * 
-     * @param from 统计开始时间
-     * @param statisticInterval 统计时间间隔
-     * @return 任务运行结果统计数据集合
+     * Find task result statistics.
+     *
+     * @param from from date to statistics
+     * @param statisticInterval statistic interval
+     * @return task result statistics
      */
     public List<TaskResultStatistics> findTaskResultStatistics(final Date from, final StatisticInterval statisticInterval) {
         List<TaskResultStatistics> result = new LinkedList<>();
@@ -283,18 +275,18 @@ public class StatisticRdbRepository {
                 result.add(taskResultStatistics);
             }
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Fetch taskResultStatistics from DB error:", ex);
         }
         return result;
     }
-    
+
     /**
-     * 获取合计后的任务运行结果统计数据.
-     * 
-     * @param from 统计开始时间
-     * @param statisticInterval 统计时间间隔
-     * @return 合计后的任务运行结果统计数据对象
+     * Get summed task result statistics.
+     *
+     * @param from from date to statistics
+     * @param statisticInterval statistic interval
+     * @return summed task result statistics
      */
     public TaskResultStatistics getSummedTaskResultStatistics(final Date from, final StatisticInterval statisticInterval) {
         TaskResultStatistics result = new TaskResultStatistics(0, 0, statisticInterval, new Date());
@@ -310,17 +302,17 @@ public class StatisticRdbRepository {
                 result = new TaskResultStatistics(resultSet.getInt(1), resultSet.getInt(2), statisticInterval, new Date());
             }
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Fetch summed taskResultStatistics from DB error:", ex);
         }
         return result;
     }
-    
+
     /**
-     * 获取最近一条任务运行结果统计数据.
-     * 
-     * @param statisticInterval 统计时间间隔
-     * @return 任务运行结果统计数据对象
+     * Find latest task result statistics.
+     *
+     * @param statisticInterval statistic interval
+     * @return task result statistics
      */
     public Optional<TaskResultStatistics> findLatestTaskResultStatistics(final StatisticInterval statisticInterval) {
         TaskResultStatistics result = null;
@@ -336,17 +328,17 @@ public class StatisticRdbRepository {
                         statisticInterval, new Date(resultSet.getTimestamp(4).getTime()), new Date(resultSet.getTimestamp(5).getTime()));
             }
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Fetch latest taskResultStatistics from DB error:", ex);
         }
         return Optional.fromNullable(result);
     }
-    
+
     /**
-     * 获取运行中的任务统计数据集合.
-     * 
-     * @param from 统计开始时间
-     * @return 运行中的任务统计数据集合
+     * Find task running statistics.
+     *
+     * @param from from date to statistics
+     * @return Task running statistics
      */
     public List<TaskRunningStatistics> findTaskRunningStatistics(final Date from) {
         List<TaskRunningStatistics> result = new LinkedList<>();
@@ -364,17 +356,17 @@ public class StatisticRdbRepository {
                 result.add(taskRunningStatistics);
             }
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Fetch taskRunningStatistics from DB error:", ex);
         }
         return result;
     }
-    
+
     /**
-     * 获取运行中的任务统计数据集合.
-     * 
-     * @param from 统计开始时间
-     * @return 运行中的任务统计数据集合
+     * Find job running statistics.
+     *
+     * @param from from date to statistics
+     * @return job running statistics
      */
     public List<JobRunningStatistics> findJobRunningStatistics(final Date from) {
         List<JobRunningStatistics> result = new LinkedList<>();
@@ -392,16 +384,16 @@ public class StatisticRdbRepository {
                 result.add(jobRunningStatistics);
             }
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Fetch jobRunningStatistics from DB error:", ex);
         }
         return result;
     }
-    
+
     /**
-     * 获取最近一条运行中的任务统计数据.
-     * 
-     * @return 运行中的任务统计数据对象
+     * Find latest task running statistics.
+     *
+     * @return latest task running statistics
      */
     public Optional<TaskRunningStatistics> findLatestTaskRunningStatistics() {
         TaskRunningStatistics result = null;
@@ -417,16 +409,16 @@ public class StatisticRdbRepository {
                         new Date(resultSet.getTimestamp(3).getTime()), new Date(resultSet.getTimestamp(4).getTime()));
             }
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Fetch latest taskRunningStatistics from DB error:", ex);
         }
         return Optional.fromNullable(result);
     }
-    
+
     /**
-     * 获取最近一条运行中的任务统计数据.
-     * 
-     * @return 运行中的任务统计数据对象
+     * Find latest job running statistics.
+     *
+     * @return job running statistics
      */
     public Optional<JobRunningStatistics> findLatestJobRunningStatistics() {
         JobRunningStatistics result = null;
@@ -442,17 +434,17 @@ public class StatisticRdbRepository {
                         new Date(resultSet.getTimestamp(3).getTime()), new Date(resultSet.getTimestamp(4).getTime()));
             }
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Fetch latest jobRunningStatistics from DB error:", ex);
         }
         return Optional.fromNullable(result);
     }
-    
+
     /**
-     * 获取作业注册统计数据集合.
-     * 
-     * @param from 统计开始时间
-     * @return 作业注册统计数据集合
+     * Find job register statistics.
+     *
+     * @param from from date to statistics
+     * @return job register statistics
      */
     public List<JobRegisterStatistics> findJobRegisterStatistics(final Date from) {
         List<JobRegisterStatistics> result = new LinkedList<>();
@@ -470,16 +462,16 @@ public class StatisticRdbRepository {
                 result.add(jobRegisterStatistics);
             }
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Fetch jobRegisterStatistics from DB error:", ex);
         }
         return result;
     }
-    
+
     /**
-     * 获取最近一条作业注册统计数据.
-     * 
-     * @return 作业注册统计数据对象
+     * Find latest job register statistics.
+     *
+     * @return job register statistics
      */
     public Optional<JobRegisterStatistics> findLatestJobRegisterStatistics() {
         JobRegisterStatistics result = null;
@@ -495,7 +487,7 @@ public class StatisticRdbRepository {
                         new Date(resultSet.getTimestamp(3).getTime()), new Date(resultSet.getTimestamp(4).getTime()));
             }
         } catch (final SQLException ex) {
-            // TODO 记录失败直接输出日志,未来可考虑配置化
+            // TODO log failure directly to output log, consider to be configurable in the future
             log.error("Fetch latest jobRegisterStatistics from DB error:", ex);
         }
         return Optional.fromNullable(result);

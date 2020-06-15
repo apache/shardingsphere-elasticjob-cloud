@@ -23,9 +23,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
- * 作业执行事件Throwable.
- *
- * @author liguangyun
+ * Job execution event throwable.
  */
 @RequiredArgsConstructor
 @AllArgsConstructor

@@ -27,29 +27,19 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 /**
- * 获取真实本机网络的服务.
- * 
- * @author zhangliang
+ * IP address utility.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class IpUtils {
-    
-    /**
-     * IP地址的正则表达式.
-     */
+
     public static final String IP_REGEX = "((\\d|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])(\\.(\\d|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3})";
     
     private static volatile String cachedIpAddress;
-    
+
     /**
-     * 获取本机IP地址.
-     * 
-     * <p>
-     * 有限获取外网IP地址.
-     * 也有可能是链接着路由器的最终IP地址.
-     * </p>
-     * 
-     * @return 本机IP地址
+     * Get IP address for localhost.
+     *
+     * @return IP address for localhost
      */
     public static String getIp() {
         if (null != cachedIpAddress) {
@@ -92,11 +82,11 @@ public final class IpUtils {
     private static boolean isV6IpAddress(final InetAddress ipAddress) {
         return ipAddress.getHostAddress().contains(":");
     }
-    
+
     /**
-     * 获取本机Host名称.
-     * 
-     * @return 本机Host名称
+     * Get host name for localhost.
+     *
+     * @return host name for localhost
      */
     public static String getHostName() {
         try {

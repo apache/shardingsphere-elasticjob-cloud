@@ -39,9 +39,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 
 /**
- * 弹性化分布式作业执行器.
- *
- * @author zhangliang
+ * ElasticJob executor.
  */
 @Slf4j
 public abstract class AbstractElasticJobExecutor {
@@ -90,9 +88,9 @@ public abstract class AbstractElasticJobExecutor {
             throw new JobSystemException(e);
         }
     }
-    
+
     /**
-     * 执行作业.
+     * Execute job.
      */
     public final void execute() {
         try {
@@ -149,7 +147,7 @@ public abstract class AbstractElasticJobExecutor {
         try {
             process(shardingContexts, executionSource);
         } finally {
-            // TODO 考虑增加作业失败的状态，并且考虑如何处理作业失败的整体回路
+            // TODO Consider increasing the status of job failure, and how to handle the overall loop of job failure
             jobFacade.registerJobCompleted(shardingContexts);
             if (itemErrorMessages.isEmpty()) {
                 if (shardingContexts.isAllowSendJobEvent()) {

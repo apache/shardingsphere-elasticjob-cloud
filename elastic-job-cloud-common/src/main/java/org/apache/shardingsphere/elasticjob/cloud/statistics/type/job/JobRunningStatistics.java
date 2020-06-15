@@ -24,9 +24,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.Date;
 
 /**
- * 运行中的作业统计数据.
- *
- * @author liguangyun
+ * Job running statistics.
  */
 @Getter
 @RequiredArgsConstructor

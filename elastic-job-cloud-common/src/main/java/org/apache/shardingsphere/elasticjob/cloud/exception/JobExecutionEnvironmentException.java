@@ -18,9 +18,7 @@
 package org.apache.shardingsphere.elasticjob.cloud.exception;
 
 /**
- * 作业执行环境异常.
- * 
- * @author zhangliang
+ * Job execution environment exception.
  */
 public final class JobExecutionEnvironmentException extends Exception {
     

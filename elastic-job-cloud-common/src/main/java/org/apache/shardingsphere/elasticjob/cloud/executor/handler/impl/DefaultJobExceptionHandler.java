@@ -21,9 +21,7 @@ import org.apache.shardingsphere.elasticjob.cloud.executor.handler.JobExceptionH
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 默认作业异常处理器.
- *
- * @author zhangliang
+ * Default job exception handler.
  */
 @Slf4j
 public final class DefaultJobExceptionHandler implements JobExceptionHandler {

@@ -21,16 +21,14 @@ import org.apache.shardingsphere.elasticjob.cloud.api.ElasticJob;
 import org.apache.shardingsphere.elasticjob.cloud.api.ShardingContext;
 
 /**
- * 简单分布式作业接口.
- * 
- * @author zhangliang
+ * Simple job.
  */
 public interface SimpleJob extends ElasticJob {
     
     /**
-     * 执行作业.
+     * Execute job.
      *
-     * @param shardingContext 分片上下文
+     * @param shardingContext sharding context
      */
     void execute(ShardingContext shardingContext);
 }

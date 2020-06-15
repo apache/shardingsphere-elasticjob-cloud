@@ -26,9 +26,7 @@ import org.apache.shardingsphere.elasticjob.cloud.executor.JobFacade;
 import java.util.List;
 
 /**
- * 数据流作业执行器.
- * 
- * @author zhangliang
+ * Dataflow job executor.
  */
 public final class DataflowJobExecutor extends AbstractElasticJobExecutor {
     

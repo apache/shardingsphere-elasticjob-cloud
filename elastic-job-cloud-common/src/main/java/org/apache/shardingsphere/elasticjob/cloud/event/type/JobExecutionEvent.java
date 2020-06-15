@@ -29,9 +29,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * 作业执行事件.
- *
- * @author zhangliang
+ * Job execution event.
  */
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -62,11 +60,11 @@ public final class JobExecutionEvent implements JobEvent {
     
     @Setter
     private JobExecutionEventThrowable failureCause;
-    
+
     /**
-     * 作业执行成功.
-     * 
-     * @return 作业执行事件
+     * Execution success.
+     *
+     * @return job execution event
      */
     public JobExecutionEvent executionSuccess() {
         JobExecutionEvent result = new JobExecutionEvent(id, hostname, ip, taskId, jobName, source, shardingItem, startTime, completeTime, success, failureCause);
@@ -74,12 +72,12 @@ public final class JobExecutionEvent implements JobEvent {
         result.setSuccess(true);
         return result;
     }
-    
+
     /**
-     * 作业执行失败.
-     * 
-     * @param failureCause 失败原因
-     * @return 作业执行事件
+     * execution failure.
+     *
+     * @param failureCause failure cause
+     * @return job execution event
      */
     public JobExecutionEvent executionFailure(final Throwable failureCause) {
         JobExecutionEvent result = new JobExecutionEvent(id, hostname, ip, taskId, jobName, source, shardingItem, startTime, completeTime, success, new JobExecutionEventThrowable(failureCause));
@@ -87,18 +85,18 @@ public final class JobExecutionEvent implements JobEvent {
         result.setSuccess(false);
         return result;
     }
-    
+
     /**
-     * 获取失败原因.
-     * 
-     * @return 失败原因
+     * Get failure cause.
+     *
+     * @return failure cause
      */
     public String getFailureCause() {
         return ExceptionUtil.transform(failureCause == null ? null : failureCause.getThrowable());
     }
-    
+
     /**
-     * 执行来源.
+     * Execution source.
      */
     public enum ExecutionSource {
         NORMAL_TRIGGER, MISFIRE, FAILOVER

@@ -23,10 +23,7 @@ import org.apache.shardingsphere.elasticjob.cloud.util.concurrent.ExecutorServic
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 运行痕迹事件总线.
- * 
- * @author zhangliang
- * @author caohao
+ * Job event bus.
  */
 @Slf4j
 public final class JobEventBus {
@@ -60,11 +57,11 @@ public final class JobEventBus {
             log.error("Elastic job: create JobEventListener failure, error is: ", ex);
         }
     }
-    
+
     /**
-     * 发布事件.
+     * Post event.
      *
-     * @param event 作业事件
+     * @param event job event
      */
     public void post(final JobEvent event) {
         if (isRegistered && !executorServiceObject.isShutdown()) {

@@ -23,9 +23,7 @@ import org.apache.shardingsphere.elasticjob.cloud.executor.AbstractElasticJobExe
 import org.apache.shardingsphere.elasticjob.cloud.executor.JobFacade;
 
 /**
- * 简单作业执行器.
- * 
- * @author zhangliang
+ * Simple job executor.
  */
 public final class SimpleJobExecutor extends AbstractElasticJobExecutor {
     

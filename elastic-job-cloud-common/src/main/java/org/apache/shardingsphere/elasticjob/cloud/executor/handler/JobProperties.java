@@ -30,21 +30,19 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * 作业属性配置.
- *
- * @author zhangliang
+ * Job properties.
  */
 @AllArgsConstructor
 @NoArgsConstructor
 public final class JobProperties {
     
     private EnumMap<JobPropertiesEnum, String> map = new EnumMap<>(JobPropertiesEnum.class);
-    
+
     /**
-     * 设置作业属性.
-     * 
-     * @param key 属性键
-     * @param value 属性值
+     * Put job property.
+     *
+     * @param key property key
+     * @param value property value
      */
     public void put(final String key, final String value) {
         JobPropertiesEnum jobPropertiesEnum = JobPropertiesEnum.from(key);
@@ -53,21 +51,21 @@ public final class JobProperties {
         }
         map.put(jobPropertiesEnum, value);
     }
-    
+
     /**
-     * 获取作业属性.
-     * 
-     * @param jobPropertiesEnum 作业属性枚举
-     * @return 属性值
+     * Get job property.
+     *
+     * @param jobPropertiesEnum job properties enum
+     * @return property value
      */
     public String get(final JobPropertiesEnum jobPropertiesEnum) {
         return map.containsKey(jobPropertiesEnum) ? map.get(jobPropertiesEnum) : jobPropertiesEnum.getDefaultValue();
     }
-    
+
     /**
-     * 获取所有键.
-     * 
-     * @return 键集合
+     * Get all keys.
+     *
+     * @return all keys
      */
     public String json() {
         Map<String, String> jsonMap = new LinkedHashMap<>(JobPropertiesEnum.values().length, 1);
@@ -76,21 +74,21 @@ public final class JobProperties {
         }
         return GsonFactory.getGson().toJson(jsonMap);
     }
-    
+
     /**
-     * 作业属性枚举.
+     * Job properties enum.
      */
     @RequiredArgsConstructor
     @Getter
     public enum JobPropertiesEnum {
-        
+
         /**
-         * 作业异常处理器.
+         * Job execution handler.
          */
         JOB_EXCEPTION_HANDLER("job_exception_handler", JobExceptionHandler.class, DefaultJobExceptionHandler.class.getCanonicalName()),
-        
+
         /**
-         * 线程池服务处理器.
+         * Executor service handler.
          */
         EXECUTOR_SERVICE_HANDLER("executor_service_handler", ExecutorServiceHandler.class, DefaultExecutorServiceHandler.class.getCanonicalName());
         
@@ -99,12 +97,12 @@ public final class JobProperties {
         private final Class<?> classType;
         
         private final String defaultValue;
-        
+
         /**
-         * 通过属性键获取枚举.
-         * 
-         * @param key 属性键
-         * @return 枚举
+         * Get job properties enum via key.
+         *
+         * @param key property key
+         * @return job properties enum
          */
         public static JobPropertiesEnum from(final String key) {
             for (JobPropertiesEnum each : JobPropertiesEnum.values()) {

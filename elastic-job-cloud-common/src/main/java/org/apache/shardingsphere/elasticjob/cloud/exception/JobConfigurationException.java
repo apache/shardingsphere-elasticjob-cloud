@@ -18,9 +18,7 @@
 package org.apache.shardingsphere.elasticjob.cloud.exception;
 
 /**
- * 作业配置异常.
- * 
- * @author zhangliang
+ * Job configuration exception.
  */
 public final class JobConfigurationException extends RuntimeException {
     

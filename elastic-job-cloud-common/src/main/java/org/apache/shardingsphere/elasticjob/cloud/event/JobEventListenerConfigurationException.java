@@ -18,9 +18,7 @@
 package org.apache.shardingsphere.elasticjob.cloud.event;
 
 /**
- * 作业事件监听器配置异常.
- * 
- * @author zhangliang
+ * Job event listener configuration exception.
  */
 public final class JobEventListenerConfigurationException extends Exception {
     

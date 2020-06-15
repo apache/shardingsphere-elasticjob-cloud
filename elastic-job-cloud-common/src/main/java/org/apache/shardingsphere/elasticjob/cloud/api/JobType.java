@@ -18,9 +18,7 @@
 package org.apache.shardingsphere.elasticjob.cloud.api;
 
 /**
- * 作业类型.
- *
- * @author caohao
+ * Job type.
  */
 public enum JobType {
     

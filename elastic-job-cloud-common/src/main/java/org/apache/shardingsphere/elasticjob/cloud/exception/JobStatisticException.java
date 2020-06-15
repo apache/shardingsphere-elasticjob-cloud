@@ -18,9 +18,7 @@
 package org.apache.shardingsphere.elasticjob.cloud.exception;
 
 /**
- * 作业统计异常.
- * 
- * @author liguangyun
+ * Job statistic exception.
  */
 public final class JobStatisticException extends RuntimeException {
     

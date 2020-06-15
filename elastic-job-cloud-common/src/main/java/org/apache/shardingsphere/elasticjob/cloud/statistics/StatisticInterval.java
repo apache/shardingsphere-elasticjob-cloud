@@ -21,9 +21,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 统计时间间隔.
- *
- * @author liguangyun
+ * Task running statistics.
  */
 @Getter
 @RequiredArgsConstructor

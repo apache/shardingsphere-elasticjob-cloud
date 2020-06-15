@@ -18,9 +18,7 @@
 package org.apache.shardingsphere.elasticjob.cloud.exception;
 
 /**
- * 作业系统异常.
- * 
- * @author zhangliang
+ * Job system exception.
  */
 public final class JobSystemException extends RuntimeException {
     

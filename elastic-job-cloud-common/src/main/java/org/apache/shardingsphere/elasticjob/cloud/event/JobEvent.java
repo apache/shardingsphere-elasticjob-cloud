@@ -18,16 +18,14 @@
 package org.apache.shardingsphere.elasticjob.cloud.event;
 
 /**
- * 作业事件接口.
- *
- * @author zhangliang
+ * Job event.
  */
 public interface JobEvent {
-    
+
     /**
-     * 获取作业名称.
-     * 
-     * @return 作业名称
+     * Get job name.
+     *
+     * @return job name
      */
     String getJobName();
 }

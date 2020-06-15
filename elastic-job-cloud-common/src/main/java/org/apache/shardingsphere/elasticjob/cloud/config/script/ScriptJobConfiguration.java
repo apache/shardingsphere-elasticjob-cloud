@@ -25,10 +25,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 脚本作业配置.
- * 
- * @author caohao
- * @author zhangliang
+ * Script job configuration.
  */
 @RequiredArgsConstructor
 @Getter
