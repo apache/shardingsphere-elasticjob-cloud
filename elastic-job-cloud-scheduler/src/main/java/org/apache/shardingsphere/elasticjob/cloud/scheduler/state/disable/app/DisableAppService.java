@@ -22,9 +22,7 @@ import org.apache.shardingsphere.elasticjob.cloud.reg.base.CoordinatorRegistryCe
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 禁用应用队列服务.
- *
- * @author caohao
+ * Disable app service.
  */
 @Slf4j
 public class DisableAppService {
@@ -38,9 +36,9 @@ public class DisableAppService {
     }
     
     /**
-     * 将应用放入禁用队列.
+     * Add application name to disable queue.
      *
-     * @param appName 应用名称
+     * @param appName application name
      */
     public void add(final String appName) {
         if (regCenter.getNumChildren(DisableAppNode.ROOT) > env.getFrameworkConfiguration().getJobStateQueueSize()) {
@@ -54,19 +52,19 @@ public class DisableAppService {
     }
     
     /**
-     * 从禁用应用队列中删除应用.
+     * Remove application name from disable queue.
      * 
-     * @param appName 待删除的应用名称
+     * @param appName application name
      */
     public void remove(final String appName) {
         regCenter.remove(DisableAppNode.getDisableAppNodePath(appName));
     }
     
     /**
-     * 判断应用是否在禁用应用队列中.
+     * Check whether the application name is disabled or not.
      * 
-     * @param appName 应用名称
-     * @return 应用是否被禁用
+     * @param appName application name
+     * @return true is in the disable queue, otherwise not
      */
     public boolean isDisabled(final String appName) {
         return regCenter.isExisted(DisableAppNode.getDisableAppNodePath(appName));

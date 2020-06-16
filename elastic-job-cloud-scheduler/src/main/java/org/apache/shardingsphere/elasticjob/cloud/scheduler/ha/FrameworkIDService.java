@@ -23,9 +23,7 @@ import com.google.common.base.Strings;
 import lombok.RequiredArgsConstructor;
 
 /**
- * FrameworkID 的保存器.
- * 
- * @author gaohongtao
+ * FrameworkID service.
  */
 @RequiredArgsConstructor
 public final class FrameworkIDService {
@@ -33,9 +31,9 @@ public final class FrameworkIDService {
     private final CoordinatorRegistryCenter regCenter;
     
     /**
-     * 获取FrameworkID,返回值是一个可选的结果.
+     * Fetch FrameworkID.
      * 
-     * @return 获取FrameworkID的可选结果
+     * @return the optional value of FrameworkID
      */
     public Optional<String> fetch() {
         String frameworkId = regCenter.getDirectly(HANode.FRAMEWORK_ID_NODE);
@@ -43,9 +41,9 @@ public final class FrameworkIDService {
     }
     
     /**
-     * 保存FrameworkID.
+     * Save FrameworkID.
      * 
-     * @param id Framework的ID
+     * @param id framework id
      */
     public void save(final String id) {
         if (!regCenter.isExisted(HANode.FRAMEWORK_ID_NODE)) {

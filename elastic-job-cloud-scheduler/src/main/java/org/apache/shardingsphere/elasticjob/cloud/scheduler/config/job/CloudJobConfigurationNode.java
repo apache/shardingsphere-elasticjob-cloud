@@ -21,9 +21,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * 作业配置节点路径.
- *
- * @author zhangliang
+ * Cloud job configuration node.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CloudJobConfigurationNode {

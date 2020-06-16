@@ -31,10 +31,7 @@ import java.util.Collections;
 import java.util.concurrent.Executors;
 
 /**
- * 云作业配置变更监听.
- *
- * @author zhangliang
- * @author caohao
+ * Cloud job configuration change listener.
  */
 @Slf4j
 public final class CloudJobConfigurationListener implements TreeCacheListener {
@@ -93,14 +90,14 @@ public final class CloudJobConfigurationListener implements TreeCacheListener {
     }
     
     /**
-     * 启动云作业配置变更监听服务.
+     * Start the listener service of the cloud job service.
      */
     public void start() {
         getCache().getListenable().addListener(this, Executors.newSingleThreadExecutor());
     }
     
     /**
-     * 停止云作业配置变更监听服务.
+     * Stop the listener service of the cloud job service.
      */
     public void stop() {
         getCache().getListenable().removeListener(this);

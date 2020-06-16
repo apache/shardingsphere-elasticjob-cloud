@@ -39,10 +39,7 @@ import org.apache.mesos.Protos;
 import org.apache.mesos.SchedulerDriver;
 
 /**
- * 调度服务.
- *
- * @author zhangliang
- * @author caohao
+ * Scheduler service.
  */
 @Slf4j
 @AllArgsConstructor
@@ -124,7 +121,7 @@ public final class SchedulerService {
     }
     
     /**
-     * 以守护进程方式启动.
+     * Start as a daemon.
      */
     public void start() {
         facadeService.start();
@@ -140,7 +137,7 @@ public final class SchedulerService {
     }
     
     /**
-     * 停止运行.
+     * Stop.
      */
     public void stop() {
         restfulService.stop();

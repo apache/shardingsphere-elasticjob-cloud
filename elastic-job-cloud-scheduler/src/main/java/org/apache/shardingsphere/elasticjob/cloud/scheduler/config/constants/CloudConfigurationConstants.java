@@ -18,9 +18,7 @@
 package org.apache.shardingsphere.elasticjob.cloud.scheduler.config.constants;
 
 /**
- * Cloud配置的常量.
- *
- * @author caohao
+ * Cloud configuration constants.
  */
 public final class CloudConfigurationConstants {
     

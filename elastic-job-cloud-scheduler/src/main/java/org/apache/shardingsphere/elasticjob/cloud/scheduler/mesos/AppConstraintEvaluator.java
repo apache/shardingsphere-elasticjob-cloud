@@ -40,13 +40,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * App目标slave适配度限制器.
- * 
- * <p>
- * 选择slave时需要考虑其上是否运行有App的executor,如果没有运行executor需要将其资源消耗考虑进适配计算算法中.
- * </p>
- * 
- * @author gaohongtao
+ * App constrain evaluator.
  */
 @Slf4j
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
@@ -59,9 +53,9 @@ public final class AppConstraintEvaluator implements ConstraintEvaluator {
     private final FacadeService facadeService;
     
     /**
-     * 初始化.
+     * Init.
      * 
-     * @param facadeService 为Mesos提供的门面服务
+     * @param facadeService Mesos facade service
      */
     public static void init(final FacadeService facadeService) {
         instance = new AppConstraintEvaluator(facadeService);

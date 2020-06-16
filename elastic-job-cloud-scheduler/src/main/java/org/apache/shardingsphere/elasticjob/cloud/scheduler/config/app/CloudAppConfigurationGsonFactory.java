@@ -28,9 +28,7 @@ import lombok.NoArgsConstructor;
 import java.io.IOException;
 
 /**
- * 云作业App配置的Gson工厂.
- *
- * @author caohao
+ * Cloud app configuration gson factory.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CloudAppConfigurationGsonFactory {
@@ -40,29 +38,27 @@ public final class CloudAppConfigurationGsonFactory {
     }
     
     /**
-     * 将云作业App配置转换为JSON字符串.
+     * Convert cloud app configuration to json string.
      *
-     * @param cloudAppConfig 云作业App配置对象
-     * @return 作业配置JSON字符串
+     * @param cloudAppConfig cloud app config
+     * @return json string
      */
     public static String toJson(final CloudAppConfiguration cloudAppConfig) {
         return GsonFactory.getGson().toJson(cloudAppConfig);
     }
     
     /**
-     * 将JSON字符串转换为云作业App配置.
+     * Convert json string to cloud app configuration.
      *
-     * @param cloudAppConfigJson 云作业App配置JSON字符串
-     * @return 作业配置对象
+     * @param cloudAppConfigJson json string of the cloud app configuration
+     * @return cloud app configuration
      */
     public static CloudAppConfiguration fromJson(final String cloudAppConfigJson) {
         return GsonFactory.getGson().fromJson(cloudAppConfigJson, CloudAppConfiguration.class);
     }
     
     /**
-     * 云作业App配置的Json转换适配器.
-     *
-     * @author caohao
+     * Json adapter of the cloud app configuration.
      */
     public static final class CloudAppConfigurationGsonTypeAdapter extends TypeAdapter<CloudAppConfiguration> {
     

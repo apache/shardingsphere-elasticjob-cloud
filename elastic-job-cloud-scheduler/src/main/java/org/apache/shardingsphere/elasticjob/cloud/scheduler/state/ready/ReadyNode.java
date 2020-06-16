@@ -22,9 +22,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * 待运行作业队列节点路径.
- *
- * @author zhangliang
+ * Ready node.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 final class ReadyNode {

@@ -25,9 +25,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 /**
- * RESTFul API的异常处理器.
- *
- * @author zhangliang
+ * Restful api exception mapper.
  */
 @Provider
 public final class RestfulExceptionMapper implements ExceptionMapper<Throwable> {

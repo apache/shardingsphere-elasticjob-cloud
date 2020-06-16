@@ -23,9 +23,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * 运行中任务节点路径.
- *
- * @author zhangliang
+ * Running node.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 final class RunningNode {

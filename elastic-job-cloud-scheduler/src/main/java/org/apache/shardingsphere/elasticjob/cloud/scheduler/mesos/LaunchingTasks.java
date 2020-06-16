@@ -34,9 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 分配任务行为包.
- *
- * @author zhangliang
+ * Launching tasks.
  */
 @Slf4j
 public final class LaunchingTasks {

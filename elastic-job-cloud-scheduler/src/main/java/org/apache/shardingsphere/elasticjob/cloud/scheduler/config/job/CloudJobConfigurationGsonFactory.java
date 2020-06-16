@@ -31,10 +31,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Cloud作业配置的Gson工厂.
- *
- * @author zhangliang
- * @author caohao
+ * Cloud job configuration gson factory.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CloudJobConfigurationGsonFactory {
@@ -44,29 +41,27 @@ public final class CloudJobConfigurationGsonFactory {
     }
     
     /**
-     * 将作业配置转换为JSON字符串.
+     * Convert cloud job configuration to json string.
      *
-     * @param cloudJobConfig 作业配置对象
-     * @return 作业配置JSON字符串
+     * @param cloudJobConfig cloud job configuration
+     * @return the json string of the cloud job configuration
      */
     public static String toJson(final CloudJobConfiguration cloudJobConfig) {
         return GsonFactory.getGson().toJson(cloudJobConfig);
     }
     
     /**
-     * 将JSON字符串转换为作业配置.
+     * Convert json string to cloud job configuration.
      *
-     * @param cloudJobConfigJson 作业配置JSON字符串
-     * @return 作业配置对象
+     * @param cloudJobConfigJson json string of the cloud job configuration
+     * @return cloud job configuration
      */
     public static CloudJobConfiguration fromJson(final String cloudJobConfigJson) {
         return GsonFactory.getGson().fromJson(cloudJobConfigJson, CloudJobConfiguration.class);
     }
-    
+
     /**
-     * Cloud作业配置的Json转换适配器.
-     *
-     * @author zhangliang
+     * Json adapter of the cloud job configuration.
      */
     public static final class CloudJobConfigurationGsonTypeAdapter extends AbstractJobConfigurationGsonTypeAdapter<CloudJobConfiguration> {
         

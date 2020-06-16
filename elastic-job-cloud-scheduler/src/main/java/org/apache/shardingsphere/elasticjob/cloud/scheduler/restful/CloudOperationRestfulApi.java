@@ -32,9 +32,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
 /**
- * 作业云维护服务.
- * 
- * @author gaohongtao.
+ * Cloud operation restful api.
  */
 @Path("/operate")
 @Slf4j
@@ -49,10 +47,10 @@ public final class CloudOperationRestfulApi {
     private static long lastReconcileTime;
     
     /**
-     * 初始化.
+     * Init.
      * 
-     * @param regCenter 注册中心
-     * @param reconcileService 协调服务
+     * @param regCenter registry center
+     * @param reconcileService reconcile service
      */
     public static void init(final CoordinatorRegistryCenter regCenter, final ReconcileService reconcileService) {
         CloudOperationRestfulApi.reconcileService = reconcileService;
@@ -60,8 +58,7 @@ public final class CloudOperationRestfulApi {
     }
     
     /**
-     * 显示协调服务.
-     * 
+     * Explicit reconcile service.
      */
     @POST
     @Path("/reconcile/explicit")
@@ -71,7 +68,7 @@ public final class CloudOperationRestfulApi {
     }
     
     /**
-     * 隐式协调服务.
+     * Implicit reconcile service.
      */
     @POST
     @Path("/reconcile/implicit")
@@ -88,11 +85,11 @@ public final class CloudOperationRestfulApi {
     }
     
     /**
-     * 获取作业云App的沙箱信息.
+     * Get sandbox of the cloud job by app name.
      *
-     * @param appName 云作业App配置名称
-     * @return 沙箱信息
-     * @throws JSONException JSON解析异常
+     * @param appName application name
+     * @return sandbox info
+     * @throws JSONException parse json exception
      */
     @GET
     @Path("/sandbox")

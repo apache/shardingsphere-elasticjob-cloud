@@ -41,9 +41,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 任务运行结果统计作业.
- *
- * @author liguangyun
+ * Task result statistic.
  */
 @Setter
 @NoArgsConstructor

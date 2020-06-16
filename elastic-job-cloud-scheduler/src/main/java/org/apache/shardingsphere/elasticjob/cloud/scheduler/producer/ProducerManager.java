@@ -39,10 +39,7 @@ import org.apache.mesos.Protos.SlaveID;
 import org.apache.mesos.SchedulerDriver;
 
 /**
- * 发布任务作业调度管理器.
- *
- * @author caohao
- * @author zhangliang
+ * Producer manager.
  */
 @Slf4j
 public final class ProducerManager {
@@ -75,7 +72,7 @@ public final class ProducerManager {
     }
     
     /**
-     * 启动作业调度器.
+     * Start the producer manager.
      */
     public void startup() {
         log.info("Start producer manager");
@@ -86,9 +83,9 @@ public final class ProducerManager {
     }
     
     /**
-     * 注册作业.
+     * Register the job.
      * 
-     * @param jobConfig 作业配置
+     * @param jobConfig cloud job config
      */
     public void register(final CloudJobConfiguration jobConfig) {
         if (disableJobService.isDisabled(jobConfig.getJobName())) {
@@ -107,9 +104,9 @@ public final class ProducerManager {
     }
     
     /**
-     * 更新作业配置.
+     * Update the job.
      *
-     * @param jobConfig 作业配置
+     * @param jobConfig cloud job config
      */
     public void update(final CloudJobConfiguration jobConfig) {
         Optional<CloudJobConfiguration> jobConfigFromZk = configService.load(jobConfig.getJobName());
@@ -121,9 +118,9 @@ public final class ProducerManager {
     }
     
     /**
-     * 注销作业.
+     * Deregister the job.
      * 
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void deregister(final String jobName) {
         Optional<CloudJobConfiguration> jobConfig = configService.load(jobName);
@@ -135,9 +132,9 @@ public final class ProducerManager {
     }
     
     /**
-     * 调度作业.
-     * 
-     * @param jobConfig 作业配置
+     * Schedule the job.
+     *
+     * @param jobConfig cloud job config
      */
     public void schedule(final CloudJobConfiguration jobConfig) {
         if (disableAppService.isDisabled(jobConfig.getAppName()) || disableJobService.isDisabled(jobConfig.getJobName())) {
@@ -151,9 +148,9 @@ public final class ProducerManager {
     }
     
     /**
-     * 停止调度作业.
+     * Stop to schedule the job.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void unschedule(final String jobName) {
         for (TaskContext each : runningService.getRunningTasks(jobName)) {
@@ -168,9 +165,9 @@ public final class ProducerManager {
     }
     
     /**
-     * 重新调度作业.
+     * Re-schedule the job.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void reschedule(final String jobName) {
         unschedule(jobName);
@@ -181,18 +178,18 @@ public final class ProducerManager {
     }
     
     /**
-     * 向Executor发送消息.
+     * Send message to executor.
      * 
-     * @param executorId 接受消息的executorId
-     * @param slaveId 运行executor的slaveId
-     * @param data 消息内容
+     * @param executorId the executor of which to receive message
+     * @param slaveId the slave id of the executor
+     * @param data message content
      */
     public void sendFrameworkMessage(final ExecutorID executorId, final SlaveID slaveId, final byte[] data) {
         schedulerDriver.sendFrameworkMessage(executorId, slaveId, data);
     }
     
     /**
-     * 关闭作业调度器.
+     * Shutdown the producer manager.
      */
     public void shutdown() {
         log.info("Stop producer manager");

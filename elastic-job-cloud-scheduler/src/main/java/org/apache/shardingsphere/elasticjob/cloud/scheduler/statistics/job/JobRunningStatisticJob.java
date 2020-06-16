@@ -44,9 +44,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 运行中的任务统计作业.
- *
- * @author liguangyun
+ * Running job statistic.
  */
 @Setter
 @NoArgsConstructor
@@ -58,12 +56,7 @@ public final class JobRunningStatisticJob extends AbstractStatisticJob {
     private RunningService runningService;
     
     private StatisticRdbRepository repository;
-    
-    /**
-     * 构造函数.
-     * @param registryCenter 注册中心
-     * @param rdbRepository 基于rdb的数据仓库对象
-     */
+
     public JobRunningStatisticJob(final CoordinatorRegistryCenter registryCenter, final StatisticRdbRepository rdbRepository) {
         runningService = new RunningService(registryCenter);
         this.repository = rdbRepository;

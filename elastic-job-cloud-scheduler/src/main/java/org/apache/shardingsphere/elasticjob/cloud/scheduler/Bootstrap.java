@@ -31,19 +31,17 @@ import org.apache.curator.framework.CuratorFramework;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * Mesos框架启动器.
- *
- * @author caohao
+ * Mesos bootstrap.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Slf4j
 public final class Bootstrap {
     
     /**
-     * 启动入口.
+     * Startup server.
      * 
-     * @param args 命令行参数无需传入
-     * @throws InterruptedException 线程中断异常
+     * @param args arguments
+     * @throws InterruptedException thread interrupted exception
      */
     // CHECKSTYLE:OFF
     public static void main(final String[] args) throws InterruptedException {

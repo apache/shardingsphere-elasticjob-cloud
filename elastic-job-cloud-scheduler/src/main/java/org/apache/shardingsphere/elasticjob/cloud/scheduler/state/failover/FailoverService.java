@@ -42,9 +42,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 失效转移队列服务.
- *
- * @author zhangliang
+ * Failover service.
  */
 @Slf4j
 public final class FailoverService {
@@ -64,9 +62,9 @@ public final class FailoverService {
     }
     
     /**
-     * 将任务放入失效转移队列.
+     * Add task to failover queue.
      *
-     * @param taskContext 任务运行时上下文
+     * @param taskContext task running context
      */
     public void add(final TaskContext taskContext) {
         if (regCenter.getNumChildren(FailoverNode.ROOT) > env.getFrameworkConfiguration().getJobStateQueueSize()) {
@@ -75,15 +73,15 @@ public final class FailoverService {
         }
         String failoverTaskNodePath = FailoverNode.getFailoverTaskNodePath(taskContext.getMetaInfo().toString());
         if (!regCenter.isExisted(failoverTaskNodePath) && !runningService.isTaskRunning(taskContext.getMetaInfo())) {
-            // TODO Daemon类型作业增加存储是否立即失效转移
+            // TODO Whether Daemon-type jobs increase storage and fail immediately?
             regCenter.persist(failoverTaskNodePath, taskContext.getId());
         }
     }
     
     /**
-     * 从失效转移队列中获取所有有资格执行的作业上下文.
+     * Get all eligible job contexts from failover queue.
      *
-     * @return 有资格执行的作业上下文集合
+     * @return collection of the eligible job contexts
      */
     public Collection<JobContext> getAllEligibleJobContexts() {
         if (!regCenter.isExisted(FailoverNode.ROOT)) {
@@ -123,9 +121,9 @@ public final class FailoverService {
     }
     
     /**
-     * 从失效转移队列中删除相关任务.
+     * Remove task from the failover queue.
      * 
-     * @param metaInfoList 待删除的任务元信息集合
+     * @param metaInfoList collection of task meta infos to be removed
      */
     public void remove(final Collection<TaskContext.MetaInfo> metaInfoList) {
         for (TaskContext.MetaInfo each : metaInfoList) {
@@ -134,10 +132,10 @@ public final class FailoverService {
     }
     
     /**
-     * 从失效转移队列中查找任务.
+     * Get task id from failover queue.
      *
-     * @param metaInfo 任务元信息
-     * @return 失效转移任务Id
+     * @param metaInfo task meta info
+     * @return failover task id
      */
     public Optional<String> getTaskId(final TaskContext.MetaInfo metaInfo) {
         String failoverTaskNodePath = FailoverNode.getFailoverTaskNodePath(metaInfo.toString());
@@ -149,9 +147,9 @@ public final class FailoverService {
     }
     
     /**
-     * 获取待失效转移的全部任务.
+     * Get all failover tasks.
      * 
-     * @return 待失效转移的全部任务
+     * @return all failover tasks
      */
     public Map<String, Collection<FailoverTaskInfo>> getAllFailoverTasks() {
         if (!regCenter.isExisted(FailoverNode.ROOT)) {
@@ -169,10 +167,10 @@ public final class FailoverService {
     }
     
     /**
-     * 获取待失效转移的任务集合.
+     * Get failover tasks.
      *
-     * @param jobName 作业名称
-     * @return 待失效转移的任务集合
+     * @param jobName job name
+     * @return collection of failover tasks
      */
     private Collection<FailoverTaskInfo> getFailoverTasks(final String jobName) {
         List<String> failOverTasks = regCenter.getChildrenKeys(FailoverNode.getFailoverJobNodePath(jobName));

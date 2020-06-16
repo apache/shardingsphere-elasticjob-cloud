@@ -23,9 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Mesos所支持的压缩类型.
- *
- * @author zhangliang
+ * Extraction type.
  */
 @NoArgsConstructor
 public final class SupportedExtractionType {
@@ -45,9 +43,10 @@ public final class SupportedExtractionType {
     }
     
     /**
-     * 判断URL的文件是否为压缩格式.
-     * @param appURL 应用URL地址
-     * @return URL的文件是否为压缩格式
+     * Check whether the url is supported to extract or not.
+     *
+     * @param appURL app url
+     * @return true is the url supported, otherwise not
      */
     public static boolean isExtraction(final String appURL) {
         for (String each : EXTRACTION_TYPES) {

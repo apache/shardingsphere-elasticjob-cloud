@@ -21,9 +21,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Mesos框架配置项.
- *
- * @author zhangliang
+ * Mesos framework config.
  */
 @RequiredArgsConstructor
 @Getter
@@ -34,9 +32,9 @@ public final class FrameworkConfiguration {
     private final int reconcileIntervalMinutes;
     
     /**
-     * 是否启用协调服务.
+     * Check whether reconcile service is enabled or not.
      * 
-     * @return true 启用 false 不启用
+     * @return true is enabled, otherwise not
      */
     public boolean isEnabledReconcile() {
         return reconcileIntervalMinutes > 0;

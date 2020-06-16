@@ -24,30 +24,28 @@ import org.quartz.JobDetail;
 import org.quartz.Trigger;
 
 /**
- * 统计作业.
- *
- * @author liguangyun
+ * Statistic job.
  */
 public interface StatisticJob extends Job {
     
     /**
-     * 构建JobDetail.
+     * Build JobDetail.
      * 
-     * @return JobDetail对象
+     * @return JobDetail
      */
     JobDetail buildJobDetail();
     
     /**
-     * 构建Trigger.
+     * Build Trigger.
      * 
-     * @return Trigger对象
+     * @return Trigger
      */
     Trigger buildTrigger();
     
     /**
-     * 获取对象属性Map.
+     * Get data map.
      * 
-     * @return 对象属性Map，KEY为属性名称，VALUE为属性实例
+     * @return property map, key is property name, value is property instance
      */
     Map<String, Object> getDataMap();
 }

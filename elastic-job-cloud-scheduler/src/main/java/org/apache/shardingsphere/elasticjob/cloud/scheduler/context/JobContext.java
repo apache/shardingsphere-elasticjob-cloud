@@ -26,9 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 作业运行上下文.
- *
- * @author zhangliang
+ * Job running context.
  */
 @RequiredArgsConstructor
 @Getter
@@ -41,11 +39,11 @@ public final class JobContext {
     private final ExecutionType type;
     
     /**
-     * 通过作业配置创建作业运行上下文.
-     * 
-     * @param jobConfig 作业配置
-     * @param type 执行类型
-     * @return 作业运行上下文
+     * Create job running context from job configuration and execution type.
+     *
+     * @param jobConfig job configuration
+     * @param type execution type
+     * @return Job running context
      */
     public static JobContext from(final CloudJobConfiguration jobConfig, final ExecutionType type) {
         int shardingTotalCount = jobConfig.getTypeConfig().getCoreConfig().getShardingTotalCount();

@@ -22,9 +22,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * 禁用应用队列节点路径.
- *
- * @author caohao
+ * Disable app node.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 final class DisableAppNode {

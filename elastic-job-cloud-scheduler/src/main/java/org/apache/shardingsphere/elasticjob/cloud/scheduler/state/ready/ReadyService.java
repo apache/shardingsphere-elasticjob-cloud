@@ -39,10 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 待运行作业队列服务.
- *
- * @author zhangliang
- * @author liguangyun
+ * Ready service.
  */
 @Slf4j
 public final class ReadyService {
@@ -62,9 +59,9 @@ public final class ReadyService {
     }
     
     /**
-     * 将瞬时作业放入待执行队列.
+     * Add transient job to ready queue.
      * 
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void addTransient(final String jobName) {
         if (regCenter.getNumChildren(ReadyNode.ROOT) > env.getFrameworkConfiguration().getJobStateQueueSize()) {
@@ -85,9 +82,9 @@ public final class ReadyService {
     }
     
     /**
-     * 将常驻作业放入待执行队列.
+     * Add daemon job to ready queue.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void addDaemon(final String jobName) {
         if (regCenter.getNumChildren(ReadyNode.ROOT) > env.getFrameworkConfiguration().getJobStateQueueSize()) {
@@ -102,9 +99,9 @@ public final class ReadyService {
     }
     
     /**
-     * 设置禁用错过重执行.
+     * Set misfire disabled.
      * 
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void setMisfireDisabled(final String jobName) {
         Optional<CloudJobConfiguration> cloudJobConfig = configService.load(jobName);
@@ -114,10 +111,10 @@ public final class ReadyService {
     }
     
     /**
-     * 从待执行队列中获取所有有资格执行的作业上下文.
+     * Get all the eligible job contexts from ready queue.
      *
-     * @param ineligibleJobContexts 无资格执行的作业上下文
-     * @return 有资格执行的作业上下文集合
+     * @param ineligibleJobContexts ineligible job contexts
+     * @return collection of eligible contexts
      */
     public Collection<JobContext> getAllEligibleJobContexts(final Collection<JobContext> ineligibleJobContexts) {
         if (!regCenter.isExisted(ReadyNode.ROOT)) {
@@ -149,9 +146,9 @@ public final class ReadyService {
     }
     
     /**
-     * 从待执行队列中删除相关作业.
+     * Remove jobs from ready queue.
      *
-     * @param jobNames 待删除的作业名集合
+     * @param jobNames collection of jobs to be removed
      */
     public void remove(final Collection<String> jobNames) {
         for (String each : jobNames) {
@@ -167,9 +164,9 @@ public final class ReadyService {
     }
     
     /**
-     * 获取待运行的全部任务.
+     * Get all ready tasks.
      * 
-     * @return 待运行的全部任务
+     * @return all ready tasks
      */
     public Map<String, Integer> getAllReadyTasks() {
         if (!regCenter.isExisted(ReadyNode.ROOT)) {

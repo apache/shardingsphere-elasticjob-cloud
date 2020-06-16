@@ -24,9 +24,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 云作业配置对象.
- *
- * @author zhangliang
+ * Cloud job configuration.
  */
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -48,9 +46,9 @@ public final class CloudJobConfiguration implements JobRootConfiguration {
     private String applicationContext; 
     
     /**
-     * 获取作业名称.
+     * Get job name.
      *
-     * @return 作业名称
+     * @return job name
      */
     public String getJobName() {
         return typeConfig.getCoreConfig().getJobName();

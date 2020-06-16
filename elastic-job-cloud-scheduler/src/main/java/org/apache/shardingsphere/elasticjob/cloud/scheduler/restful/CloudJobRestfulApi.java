@@ -74,10 +74,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * 作业云Job的REST API.
- *
- * @author zhangliang
- * @author liguangyun
+ * Cloud job restful api.
  */
 @Path("/job")
 @Slf4j
@@ -104,10 +101,10 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 初始化.
+     * Init.
      * 
-     * @param regCenter 注册中心
-     * @param producerManager 生产管理器
+     * @param regCenter registry center
+     * @param producerManager producer manager
      */
     public static void init(final CoordinatorRegistryCenter regCenter, final ProducerManager producerManager) {
         CloudJobRestfulApi.regCenter = regCenter;
@@ -122,9 +119,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 注册作业.
+     * Register cloud job.
      * 
-     * @param jobConfig 作业配置
+     * @param jobConfig cloud job configuration
      */
     @POST
     @Path("/register")
@@ -134,9 +131,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 更新作业配置.
+     * Update cloud job.
      *
-     * @param jobConfig 作业配置
+     * @param jobConfig cloud job configuration
      */
     @PUT
     @Path("/update")
@@ -146,9 +143,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 注销作业.
+     * Deregister cloud job.
      * 
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     @DELETE
     @Path("/deregister")
@@ -158,11 +155,11 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 查询作业是否被禁用.
+     * Check whether the cloud job is disabled or not.
      *
-     * @param jobName 作业名称
-     * @return 作业是否被禁用
-     * @throws JSONException JSON解析异常
+     * @param jobName job name
+     * @return true is disabled, otherwise not
+     * @throws JSONException parse json exception
      */
     @GET
     @Path("/{jobName}/disable")
@@ -172,10 +169,10 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 启用作业.
+     * Enable cloud job.
      *
-     * @param jobName 作业名称
-     * @throws JSONException JSON解析异常
+     * @param jobName job name
+     * @throws JSONException parse json exception
      */
     @DELETE
     @Path("/{jobName}/disable")
@@ -188,9 +185,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 禁用作业.
+     * Disable cloud job.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     @POST
     @Path("/{jobName}/disable")
@@ -202,9 +199,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 触发一次作业.
+     * Trigger job once.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     @POST
     @Path("/trigger")
@@ -218,10 +215,10 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 查询作业详情.
+     * Query job detail.
      *
-     * @param jobName 作业名称
-     * @return 作业配置对象
+     * @param jobName job name
+     * @return the job detail
      */
     @GET
     @Path("/jobs/{jobName}")
@@ -235,9 +232,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 查找全部作业.
+     * Find all jobs.
      * 
-     * @return 全部作业
+     * @return all jobs
      */
     @GET
     @Path("/jobs")
@@ -247,9 +244,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 查找运行中的全部任务.
+     * Find all running tasks.
      * 
-     * @return 运行中的全部任务
+     * @return all running tasks
      */
     @GET
     @Path("tasks/running")
@@ -263,9 +260,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 查找待运行的全部任务.
+     * Find all ready tasks.
      * 
-     * @return 待运行的全部任务
+     * @return collection of all ready tasks
      */
     @GET
     @Path("tasks/ready")
@@ -283,9 +280,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 查找待失效转移的全部任务.
+     * Find all failover tasks.
      * 
-     * @return 失效转移的全部任务
+     * @return collection of all the failover tasks
      */
     @GET
     @Path("tasks/failover")
@@ -299,11 +296,11 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 检索作业运行轨迹.
+     * Find job execution events.
      * 
-     * @param info URL信息
-     * @return 作业运行轨迹结果
-     * @throws ParseException 解析异常
+     * @param info uri info
+     * @return job execution event
+     * @throws ParseException parse exception
      */
     @GET
     @Path("events/executions")
@@ -316,11 +313,11 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 检索作业运行状态轨迹.
+     * Find job status trace events.
      * 
-     * @param info URL信息
-     * @return 作业运行轨迹结果
-     * @throws ParseException 转换异常
+     * @param info uri info
+     * @return job status trace event
+     * @throws ParseException parse exception
      */
     @GET
     @Path("events/statusTraces")
@@ -371,10 +368,10 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 获取任务运行结果统计数据.
+     * Find task result statistics.
      * 
-     * @param since 时间跨度
-     * @return 任务运行结果统计数据
+     * @param since time span
+     * @return task result statistics
      */
     @GET
     @Path("/statistics/tasks/results")
@@ -388,10 +385,10 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 获取任务运行结果统计数据.
+     * Get task result statistics.
      * 
-     * @param period 时间跨度
-     * @return 任务运行结果统计数据
+     * @param period time period
+     * @return task result statistics
      */
     @GET
     @Path("/statistics/tasks/results/{period}")
@@ -411,10 +408,10 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 获取任务运行统计数据集合.
+     * Find task running statistics.
      * 
-     * @param since 时间跨度
-     * @return 任务运行统计数据集合
+     * @param since time span
+     * @return task result statistics
      */
     @GET
     @Path("/statistics/tasks/running")
@@ -428,9 +425,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 获取作业类型统计数据.
+     * Get job type statistics.
      * 
-     * @return 作业类型统计数据
+     * @return job type statistics
      */
     @GET
     @Path("/statistics/jobs/type")
@@ -440,9 +437,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 获取作业执行类型统计数据.
+     * Get job execution type statistics.
      * 
-     * @return 作业执行类型统计数据
+     * @return job execution statistics
      */
     @GET
     @Path("/statistics/jobs/executionType")
@@ -452,10 +449,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 获取一周以来作业运行统计数据集合.
-     * 
-     * @param since 时间跨度
-     * @return 一周以来任务运行统计数据集合
+     * Find job running statistics in the recent week.
+     * @param since time span
+     * @return collection of job running statistics in the recent week
      */
     @GET
     @Path("/statistics/jobs/running")
@@ -469,9 +465,9 @@ public final class CloudJobRestfulApi {
     }
     
     /**
-     * 获取自上线以来作业注册统计数据集合.
+     * Find job register statistics.
      * 
-     * @return 自上线以来作业注册统计数据集合
+     * @return collection of job register statistics since online
      */
     @GET
     @Path("/statistics/jobs/register")

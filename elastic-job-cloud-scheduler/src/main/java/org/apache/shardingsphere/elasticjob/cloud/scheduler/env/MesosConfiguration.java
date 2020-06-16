@@ -21,21 +21,19 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Mesos配置项.
- *
- * @author zhangliang
+ * Mesos config.
  */
 @RequiredArgsConstructor
 @Getter
 public final class MesosConfiguration {
     
     /**
-     * 框架名称.
+     * Framework name.
      */
     public static final String FRAMEWORK_NAME = "Elastic-Job-Cloud";
     
     /**
-     * 框架失效转移超时秒数. 默认为1周
+     * Framework failover timeout in seconds. Default is one week.
      */
     public static final double FRAMEWORK_FAILOVER_TIMEOUT_SECONDS = 60 * 60 * 24 * 7D;
     

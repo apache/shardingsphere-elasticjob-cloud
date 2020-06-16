@@ -26,9 +26,7 @@ import org.apache.shardingsphere.elasticjob.cloud.security.WwwAuthFilter;
 import com.google.common.base.Optional;
 
 /**
- * 云作业Restful服务.
- *
- * @author caohao
+ * Restful server.
  */
 public final class RestfulService {
     
@@ -44,7 +42,7 @@ public final class RestfulService {
     }
     
     /**
-     * 启动Restful服务.
+     * Start restful server.
      */
     public void start() {
         try {
@@ -59,7 +57,7 @@ public final class RestfulService {
     }
     
     /**
-     * 停止Restful服务.
+     * Stop restful server.
      */
     public void stop() {
         restfulServer.stop();

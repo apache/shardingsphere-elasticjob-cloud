@@ -22,9 +22,7 @@ import org.apache.shardingsphere.elasticjob.cloud.reg.base.CoordinatorRegistryCe
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 禁用作业队列服务.
- *
- * @author caohao
+ * Disable job service.
  */
 @Slf4j
 public class DisableJobService {
@@ -38,9 +36,9 @@ public class DisableJobService {
     }
     
     /**
-     * 将作业放入禁用队列.
+     * Add job to the disable queue.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void add(final String jobName) {
         if (regCenter.getNumChildren(DisableJobNode.ROOT) > env.getFrameworkConfiguration().getJobStateQueueSize()) {
@@ -54,19 +52,19 @@ public class DisableJobService {
     }
     
     /**
-     * 从作业禁用队列中删除作业.
+     * Remove the job from the disable queue.
      *
-     * @param jobName 待删除的作业名称
+     * @param jobName job name
      */
     public void remove(final String jobName) {
         regCenter.remove(DisableJobNode.getDisableJobNodePath(jobName));
     }
     
     /**
-     * 判断作业是否在作业禁用队列中.
+     * Determine whether the job is in the disable queue or not.
      *
-     * @param jobName 作业名称
-     * @return 作业是否被禁用
+     * @param jobName job name
+     * @return true is in the disable queue, otherwise not
      */
     public boolean isDisabled(final String jobName) {
         return regCenter.isExisted(DisableJobNode.getDisableJobNodePath(jobName));

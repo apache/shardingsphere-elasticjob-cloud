@@ -33,9 +33,7 @@ import java.util.HashMap;
 import java.util.Properties;
 
 /**
- * 启动环境对象.
- *
- * @author zhangliang
+ * Bootstrap env.
  */
 @Slf4j
 public final class BootstrapEnvironment {
@@ -74,29 +72,29 @@ public final class BootstrapEnvironment {
     }
     
     /**
-     * 获取Framework的Hostname和Port.
+     * Get the host and port of the framework.
      *
-     * @return Framework的Hostname和Port
+     * @return host and port of the framework
      */
     public String getFrameworkHostPort() {
         return String.format("%s:%d", getMesosConfiguration().getHostname(), getRestfulServerConfiguration().getPort());
     }
     
     /**
-     * 获取Mesos配置对象.
+     * Get mesos config.
      *
-     * @return Mesos配置对象
+     * @return mesos config
      */
     public MesosConfiguration getMesosConfiguration() {
         return new MesosConfiguration(getValue(EnvironmentArgument.USER), getValue(EnvironmentArgument.MESOS_URL), getValue(EnvironmentArgument.HOSTNAME));
     }
     
     /**
-     * 获取Zookeeper配置对象.
+     * Get zookeeper config.
      * 
-     * @return Zookeeper配置对象
+     * @return zookeeper config
      */
-    // TODO 其他zkConfig的值可配置
+    // TODO Other zkConfig values ​​are configurable
     public ZookeeperConfiguration getZookeeperConfiguration() {
         ZookeeperConfiguration result = new ZookeeperConfiguration(getValue(EnvironmentArgument.ZOOKEEPER_SERVERS), getValue(EnvironmentArgument.ZOOKEEPER_NAMESPACE));
         String digest = getValue(EnvironmentArgument.ZOOKEEPER_DIGEST);
@@ -107,27 +105,27 @@ public final class BootstrapEnvironment {
     }
     
     /**
-     * 获取Restful服务器配置对象.
+     * Get restful server config.
      *
-     * @return Restful服务器配置对象
+     * @return restful server config
      */
     public RestfulServerConfiguration getRestfulServerConfiguration() {
         return new RestfulServerConfiguration(Integer.parseInt(getValue(EnvironmentArgument.PORT)));
     }
     
     /**
-     * 获取Mesos框架配置对象.
+     * Get framework config.
      *
-     * @return Mesos框架配置对象
+     * @return the framework config
      */
     public FrameworkConfiguration getFrameworkConfiguration() {
         return new FrameworkConfiguration(Integer.parseInt(getValue(EnvironmentArgument.JOB_STATE_QUEUE_SIZE)), Integer.parseInt(getValue(EnvironmentArgument.RECONCILE_INTERVAL_MINUTES)));
     }
     
     /**
-     * 获取作业数据库事件配置.
+     * Get the job event rdb config.
      *
-     * @return 作业数据库事件配置
+     * @return job event rdb config
      */
     public Optional<JobEventRdbConfiguration> getJobEventRdbConfiguration() {
         String driver = getValue(EnvironmentArgument.EVENT_TRACE_RDB_DRIVER);
@@ -146,9 +144,9 @@ public final class BootstrapEnvironment {
     }
     
     /**
-     * 获取作业数据库事件配置Map.
+     * Get job event rdb config map.
      *
-     * @return 作业数据库事件配置Map
+     * @return map of the rdb config
      */
     // CHECKSTYLE:OFF
     public HashMap<String, String> getJobEventRdbConfigurationMap() {
@@ -162,9 +160,9 @@ public final class BootstrapEnvironment {
     }
     
     /**
-     * 获取该framework的mesos角色.
-     * 
-     * @return 角色的可选值.
+     * Get the role of the mesos.
+     *
+     * @return the role.
      */
     public Optional<String> getMesosRole() {
         String role = getValue(EnvironmentArgument.MESOS_ROLE);
@@ -183,9 +181,7 @@ public final class BootstrapEnvironment {
     }
     
     /**
-     * 环境参数.
-     * 
-     * @author zhangliang
+     * Env args.
      */
     @RequiredArgsConstructor
     @Getter
