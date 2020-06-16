@@ -22,9 +22,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 待失效转移任务节点信息.
- *
- * @author liguangyun
+ * Failover task info.
  */
 @RequiredArgsConstructor
 @Getter

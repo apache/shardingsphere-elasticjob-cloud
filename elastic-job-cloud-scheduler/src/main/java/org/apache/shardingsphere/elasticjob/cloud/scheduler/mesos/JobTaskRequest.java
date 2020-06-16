@@ -29,9 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 作业任务请求对象.
- *
- * @author zhangliang
+ * Job task request.
  */
 @RequiredArgsConstructor
 public final class JobTaskRequest implements TaskRequest {

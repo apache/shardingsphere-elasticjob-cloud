@@ -29,19 +29,14 @@ import org.quartz.simpl.SimpleThreadPool;
 import java.util.Properties;
 
 /**
- * 统计作业调度器.
- *
- * @author liguangyun
+ * Statistic scheduler.
  */
 final class StatisticsScheduler {
     
     private final StdSchedulerFactory factory;
     
     private Scheduler scheduler;
-    
-    /**
-     * 构造函数.
-     */
+
     StatisticsScheduler() {
         factory = new StdSchedulerFactory();
         try {
@@ -62,7 +57,7 @@ final class StatisticsScheduler {
     }
     
     /**
-     * 启动调度器.
+     * Start.
      */
     void start() {
         try {
@@ -74,9 +69,9 @@ final class StatisticsScheduler {
     }
     
     /**
-     * 注册统计作业.
+     * Register statistic job.
      * 
-     * @param statisticJob 统计作业
+     * @param statisticJob statistic job
      */
     void register(final StatisticJob statisticJob) {
         try {
@@ -89,7 +84,7 @@ final class StatisticsScheduler {
     }
     
     /**
-     * 停止调度.
+     * Shutdown.
      */
     void shutdown() {
         try {

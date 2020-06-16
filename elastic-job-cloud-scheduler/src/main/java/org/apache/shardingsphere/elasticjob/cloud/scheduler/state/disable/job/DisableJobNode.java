@@ -22,9 +22,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * 禁用作业队列节点路径.
- *
- * @author caohao
+ * Disable job node.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 final class DisableJobNode {

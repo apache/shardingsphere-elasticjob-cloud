@@ -26,30 +26,27 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * 统计时间工具类.
- *
- * @author liguangyun
+ * Statistic time utility.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class StatisticTimeUtils {
     
     /**
-     * 获取以interval为时间间隔单位的统计时间.
-     * 
-     * @param interval 时间间隔
-     * @return 时间对象
+     * Get the statistical time with the interval unit.
+     *
+     * @param interval interval
+     * @return Date
      */
     public static Date getCurrentStatisticTime(final StatisticInterval interval) {
         return getStatisticTime(interval, 0);
     }
     
     /**
-     * 偏移offset个时间间隔单位，获取以interval为时间间隔单位的统计时间.
-     * offset为负数表示时间向过去偏移，正数表示向未来偏移.
-     * 
-     * @param interval 时间间隔
-     * @param offset 时间偏移量
-     * @return 时间对象
+     * Get the statistical time with the interval unit.
+     *
+     * @param interval interval
+     * @param offset offset
+     * @return Date
      */
     public static Date getStatisticTime(final StatisticInterval interval, final int offset) {
         Calendar calendar = Calendar.getInstance();

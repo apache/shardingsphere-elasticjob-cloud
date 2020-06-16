@@ -20,62 +20,57 @@ package org.apache.shardingsphere.elasticjob.cloud.scheduler.statistics;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 统计元数据.
- *
- * @author liguangyun
+ * Task result meta data.
  */
 public final class TaskResultMetaData {
     
     private final AtomicInteger successCount;
     
     private final AtomicInteger failedCount;
-    
-    /**
-     * 构造函数.
-     */
+
     public TaskResultMetaData() {
         successCount = new AtomicInteger(0);
         failedCount = new AtomicInteger(0);
     }
     
     /**
-     * 增加并获取成功数.
+     * Increase and get success count.
      * 
-     * @return 成功数
+     * @return success count
      */
     public int incrementAndGetSuccessCount() {
         return successCount.incrementAndGet();
     }
     
     /**
-     * 增加并获取失败数.
+     * Increase and get failed count.
      * 
-     * @return 失败数
+     * @return failed count
      */
     public int incrementAndGetFailedCount() {
         return failedCount.incrementAndGet();
     }
     
     /**
-     * 获取成功数.
+     * Get success count.
      * 
-     * @return 成功数
+     * @return success count
      */
     public int getSuccessCount() {
         return successCount.get();
     }
     
     /**
-     * 获取失败数.
+     * Get failed count.
      * 
-     * @return 失败数
+     * @return failed count
      */
     public int getFailedCount() {
         return failedCount.get();
     }
     
     /**
-     * 重置成功数、失败数.
+     * Reset success and failed count.
      */
     public void reset() {
         successCount.set(0);

@@ -29,9 +29,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * 资源预占队列.
- *
- * @author zhangliang
+ * Lease queue.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class LeasesQueue {
@@ -41,27 +39,27 @@ public final class LeasesQueue {
     private final BlockingQueue<VirtualMachineLease> queue = new LinkedBlockingQueue<>();
     
     /**
-     * 获取实例.
+     * Get instance.
      * 
-     * @return 单例对象
+     * @return singleton instance
      */
     public static LeasesQueue getInstance() {
         return INSTANCE;
     }
     
     /**
-     * 添加资源至队列预占.
+     * Offer resource to lease queue.
      *
-     * @param offer 资源
+     * @param offer resource
      */
     public void offer(final Protos.Offer offer) {
         queue.offer(new VMLeaseObject(offer));
     }
     
     /**
-     * 出栈队列资源.
+     * Dump all the resources from lease queue.
      * 
-     * @return 队列资源集合
+     * @return collection of resources
      */
     public List<VirtualMachineLease> drainTo() {
         List<VirtualMachineLease> result = new ArrayList<>(queue.size());

@@ -23,9 +23,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * 待失效转移任务队列节点路径.
- *
- * @author zhangliang
+ * Failover node.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 final class FailoverNode {

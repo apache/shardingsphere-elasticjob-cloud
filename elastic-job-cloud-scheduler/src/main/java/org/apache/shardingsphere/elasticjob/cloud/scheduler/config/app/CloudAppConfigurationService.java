@@ -27,9 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 云作业App配置服务.
- *
- * @author caohao
+ * Cloud app configuration service.
  */
 @RequiredArgsConstructor
 public final class CloudAppConfigurationService {
@@ -37,37 +35,37 @@ public final class CloudAppConfigurationService {
     private final CoordinatorRegistryCenter regCenter;
     
     /**
-     * 添加云作业APP配置.
+     * Add cloud app configuration.
      *
-     * @param appConfig 云作业App配置对象
+     * @param appConfig cloud app configuration
      */
     public void add(final CloudAppConfiguration appConfig) {
         regCenter.persist(CloudAppConfigurationNode.getRootNodePath(appConfig.getAppName()), CloudAppConfigurationGsonFactory.toJson(appConfig));
     }
     
     /**
-     * 修改云作业APP配置.
+     * Update cloud app configuration.
      *
-     * @param appConfig 云作业App配置对象
+     * @param appConfig cloud app configuration
      */
     public void update(final CloudAppConfiguration appConfig) {
         regCenter.update(CloudAppConfigurationNode.getRootNodePath(appConfig.getAppName()), CloudAppConfigurationGsonFactory.toJson(appConfig));
     }
     
     /**
-     * 根据云作业App名称获取App配置.
+     * Load app configuration by app name.
      *
-     * @param appName 云作业App名称
-     * @return 云作业App配置
+     * @param appName application name
+     * @return cloud app configuration
      */
     public Optional<CloudAppConfiguration> load(final String appName) {
         return Optional.fromNullable(CloudAppConfigurationGsonFactory.fromJson(regCenter.get(CloudAppConfigurationNode.getRootNodePath(appName))));
     }
     
     /**
-     * 获取所有注册的云作业App配置.
+     * Load all registered cloud app configurations.
      *
-     * @return 注册的云作业App配置
+     * @return collection of the registered cloud app configuration
      */
     public Collection<CloudAppConfiguration> loadAll() {
         if (!regCenter.isExisted(CloudAppConfigurationNode.ROOT)) {
@@ -85,9 +83,9 @@ public final class CloudAppConfigurationService {
     }
     
     /**
-     * 删除云作业App配置.
+     * Remove cloud app configuration by app name.
      *
-     * @param appName 云作业App名称
+     * @param appName to be removed application name
      */
     public void remove(final String appName) {
         regCenter.remove(CloudAppConfigurationNode.getRootNodePath(appName));

@@ -41,9 +41,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 已注册作业统计作业.
- *
- * @author liguangyun
+ * Registered job statistic.
  */
 @Setter
 @NoArgsConstructor

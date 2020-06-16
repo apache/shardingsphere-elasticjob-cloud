@@ -40,16 +40,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
- * 任务运行时服务.
- *
- * @author zhangliang
+ * Running service.
  */
 @RequiredArgsConstructor
 public final class RunningService {
     
     private static final int TASK_INITIAL_SIZE = 1024;
     
-    // TODO 使用JMX导出
+    // TODO Using JMX to export
     @Getter
     private static final ConcurrentHashMap<String, Set<TaskContext>> RUNNING_TASKS = new ConcurrentHashMap<>(TASK_INITIAL_SIZE);
     
@@ -65,7 +63,7 @@ public final class RunningService {
     }
     
     /**
-     * 启动任务运行队列.
+     * Start running queue service.
      */
     public void start() {
         clear();
@@ -86,9 +84,9 @@ public final class RunningService {
     }
     
     /**
-     * 将任务运行时上下文放入运行时队列.
+     * Add task to running queue.
      * 
-     * @param taskContext 任务运行时上下文
+     * @param taskContext task running context
      */
     public void add(final TaskContext taskContext) {
         if (!configurationService.load(taskContext.getMetaInfo().getJobName()).isPresent()) {
@@ -110,9 +108,10 @@ public final class RunningService {
     }
     
     /**
-     * 更新作业闲置状态.
-     * @param taskContext 任务运行时上下文
-     * @param isIdle 是否闲置
+     * Update task to idle state.
+     *
+     * @param taskContext task running context
+     * @param isIdle is idle
      */
     public void updateIdle(final TaskContext taskContext, final boolean isIdle) {
         synchronized (RUNNING_TASKS) {
@@ -135,9 +134,9 @@ public final class RunningService {
     }
     
     /**
-     * 将作业从运行时队列删除.
+     * Remove job from running queue.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void remove(final String jobName) {
         RUNNING_TASKS.remove(jobName);
@@ -148,9 +147,9 @@ public final class RunningService {
     }
         
     /**
-     * 将任务从运行时队列删除.
-     * 
-     * @param taskContext 任务运行时上下文
+     *  Remove task from running queue.
+     *
+     * @param taskContext task running context
      */
     public void remove(final TaskContext taskContext) {
         getRunningTasks(taskContext.getMetaInfo().getJobName()).remove(taskContext);
@@ -170,20 +169,20 @@ public final class RunningService {
     }
     
     /**
-     * 判断作业是否运行.
+     * Determine whether the job is running or not.
      *
-     * @param jobName 作业名称
-     * @return 作业是否运行
+     * @param jobName job name
+     * @return true is running, otherwise not
      */
     public boolean isJobRunning(final String jobName) {
         return !getRunningTasks(jobName).isEmpty();
     }
     
     /**
-     * 判断任务是否运行.
+     * Determine whether the task is running or not.
      *
-     * @param metaInfo 任务元信息
-     * @return 任务是否运行
+     * @param metaInfo task meta info
+     * @return true is running, otherwise not
      */
     public boolean isTaskRunning(final TaskContext.MetaInfo metaInfo) {
         for (TaskContext each : getRunningTasks(metaInfo.getJobName())) {
@@ -195,10 +194,10 @@ public final class RunningService {
     }
     
     /**
-     * 获取运行中的任务集合.
+     * Get running tasks by job name.
      *
-     * @param jobName 作业名称
-     * @return 运行中的任务集合
+     * @param jobName job name
+     * @return collection of the running tasks
      */
     public Collection<TaskContext> getRunningTasks(final String jobName) {
         Set<TaskContext> taskContexts = new CopyOnWriteArraySet<>();
@@ -207,9 +206,9 @@ public final class RunningService {
     }
     
     /**
-     * 获取运行中的全部任务.
+     * Get all running tasks.
      *
-     * @return 运行中的全部任务
+     * @return collection of all the running tasks
      */
     public Map<String, Set<TaskContext>> getAllRunningTasks() {
         Map<String, Set<TaskContext>> result = new HashMap<>(RUNNING_TASKS.size(), 1);
@@ -218,9 +217,9 @@ public final class RunningService {
     }
     
     /**
-     * 获取所有的运行中的常驻作业.
-     * 
-     * @return 运行中常驻作业集合
+     * Get all running daemon tasks.
+     *
+     * @return collection of all the running daemon tasks
      */
     public Set<TaskContext> getAllRunningDaemonTasks() {
         List<String> jobKeys = regCenter.getChildrenKeys(RunningNode.ROOT);
@@ -239,27 +238,27 @@ public final class RunningService {
     }
     
     /**
-     * 添加任务主键和主机名称的映射.
+     * Add mapping of task primary key and hostname.
      *
-     * @param taskId 任务主键
-     * @param hostname 主机名称
+     * @param taskId task primary key
+     * @param hostname host name
      */
     public void addMapping(final String taskId, final String hostname) {
         TASK_HOSTNAME_MAPPER.putIfAbsent(taskId, hostname);
     }
     
     /**
-     * 根据任务主键获取主机名称并清除该任务.
+     * Retrieve the hostname and then remove this task from the mapping.
      *
-     * @param taskId 任务主键
-     * @return 删除任务的主机名称
+     * @param taskId task primary key
+     * @return the host name of the removed task
      */
     public String popMapping(final String taskId) {
         return TASK_HOSTNAME_MAPPER.remove(taskId);
     }
     
     /**
-     * 清理所有运行时状态.
+     * Clear the running status.
      */
     public void clear() {
         RUNNING_TASKS.clear();

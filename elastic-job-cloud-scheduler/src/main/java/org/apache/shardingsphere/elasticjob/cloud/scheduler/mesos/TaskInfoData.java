@@ -30,9 +30,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * 随任务传递的数据.
- *
- * @author zhangliang
+ * Task info data.
  */
 @RequiredArgsConstructor
 public final class TaskInfoData {
@@ -42,9 +40,9 @@ public final class TaskInfoData {
     private final CloudJobConfiguration jobConfig;
     
     /**
-     * 序列化.
+     * Serialize.
      * 
-     * @return 序列化后的字节数组
+     * @return byte array
      */
     public byte[] serialize() {
         Map<String, Object> result = new LinkedHashMap<>(2, 1);

@@ -50,9 +50,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 统计作业调度管理器.
- *
- * @author liguangyun
+ * Statistic manager.
  */
 @Slf4j
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
@@ -82,11 +80,11 @@ public final class StatisticManager {
     }
     
     /**
-     * 获取统计作业调度管理器.
+     * Get statistic manager.
      * 
-     * @param regCenter 注册中心
-     * @param jobEventRdbConfiguration 作业数据库事件配置
-     * @return 调度管理器对象
+     * @param regCenter registry center
+     * @param jobEventRdbConfiguration rdb configuration
+     * @return statistic manager
      */
     public static StatisticManager getInstance(final CoordinatorRegistryCenter regCenter, final Optional<JobEventRdbConfiguration> jobEventRdbConfiguration) {
         if (null == instance) {
@@ -115,7 +113,7 @@ public final class StatisticManager {
     }
     
     /**
-     * 启动统计作业调度.
+     * Startup.
      */
     public void startup() {
         if (null != rdbRepository) {
@@ -129,14 +127,14 @@ public final class StatisticManager {
     }
     
     /**
-     * 停止统计作业调度.
+     * Shutdown.
      */
     public void shutdown() {
         scheduler.shutdown();
     }
     
     /**
-     * 任务运行成功.
+     * Run task successfully.
      */
     public void taskRunSuccessfully() {
         statisticData.get(StatisticInterval.MINUTE).incrementAndGetSuccessCount();
@@ -145,7 +143,7 @@ public final class StatisticManager {
     }
     
     /**
-     * 作业运行失败.
+     * Run task failed.
      */
     public void taskRunFailed() {
         statisticData.get(StatisticInterval.MINUTE).incrementAndGetFailedCount();
@@ -158,9 +156,8 @@ public final class StatisticManager {
     }
     
     /**
-     * 获取最近一周的任务运行结果统计数据.
-     * 
-     * @return 任务运行结果统计数据对象
+     * Get statistic of the recent week.
+     * @return task result statistic
      */
     public TaskResultStatistics getTaskResultStatisticsWeekly() {
         if (!isRdbConfigured()) {
@@ -170,9 +167,9 @@ public final class StatisticManager {
     }
     
     /**
-     * 获取自上线以来的任务运行结果统计数据.
+     * Get statistic since online.
      * 
-     * @return 任务运行结果统计数据对象
+     * @return task result statistic
      */
     public TaskResultStatistics getTaskResultStatisticsSinceOnline() {
         if (!isRdbConfigured()) {
@@ -182,10 +179,9 @@ public final class StatisticManager {
     }
     
     /**
-     * 获取最近一个统计周期的任务运行结果统计数据.
-     * 
-     * @param statisticInterval 统计周期
-     * @return 任务运行结果统计数据对象
+     * Get the latest statistic of the specified interval.
+     * @param statisticInterval statistic interval
+     * @return task result statistic
      */
     public TaskResultStatistics findLatestTaskResultStatistics(final StatisticInterval statisticInterval) {
         if (isRdbConfigured()) {
@@ -198,9 +194,9 @@ public final class StatisticManager {
     }
     
     /**
-     * 获取最近一天的任务运行结果统计数据集合.
+     * Get statistic of the recent day.
      * 
-     * @return 任务运行结果统计数据对象集合
+     * @return task result statistic
      */
     public List<TaskResultStatistics> findTaskResultStatisticsDaily() {
         if (!isRdbConfigured()) {
@@ -210,9 +206,9 @@ public final class StatisticManager {
     }
     
     /**
-     * 获取作业类型统计数据.
+     * Get job type statistics.
      * 
-     * @return 作业类型统计数据对象
+     * @return job type statistics
      */
     public JobTypeStatistics getJobTypeStatistics() {
         int scriptJobCnt = 0;
@@ -231,9 +227,9 @@ public final class StatisticManager {
     }
     
     /**
-     * 获取作业执行类型统计数据.
+     * Get job execution type statistics.
      * 
-     * @return 作业执行类型统计数据对象
+     * @return Job execution type statistics data object
      */
     public JobExecutionTypeStatistics getJobExecutionTypeStatistics() {
         int transientJobCnt = 0;
@@ -249,9 +245,9 @@ public final class StatisticManager {
     }
     
     /**
-     * 获取最近一周的运行中的任务统计数据集合.
+     * Get the collection of task statistics in the most recent week.
      * 
-     * @return 运行中的任务统计数据对象集合
+     * @return Collection of running task statistics data objects
      */
     public List<TaskRunningStatistics> findTaskRunningStatisticsWeekly() {
         if (!isRdbConfigured()) {
@@ -261,9 +257,9 @@ public final class StatisticManager {
     }
     
     /**
-     * 获取最近一周的运行中的作业统计数据集合.
+     * Get the collection of job statistics in the most recent week.
      * 
-     * @return 运行中的任务统计数据对象集合
+     * @return collection of running task statistics data objects
      */
     public List<JobRunningStatistics> findJobRunningStatisticsWeekly() {
         if (!isRdbConfigured()) {
@@ -273,9 +269,9 @@ public final class StatisticManager {
     }
     
     /**
-     * 获取自上线以来的运行中的任务统计数据集合.
+     * Get running task statistics data collection since online.
      * 
-     * @return 运行中的任务统计数据对象集合
+     * @return collection of running task statistics data objects
      */
     public List<JobRegisterStatistics> findJobRegisterStatisticsSinceOnline() {
         if (!isRdbConfigured()) {

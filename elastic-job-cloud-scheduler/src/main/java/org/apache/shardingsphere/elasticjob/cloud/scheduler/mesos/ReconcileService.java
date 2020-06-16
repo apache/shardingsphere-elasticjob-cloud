@@ -35,9 +35,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * 协调Mesos与调度器之间的作业状态.
- * 
- * @author gaohongtao
+ * Reconcile service.
  */
 @RequiredArgsConstructor
 @Slf4j
@@ -61,7 +59,7 @@ public class ReconcileService extends AbstractScheduledService {
     }
     
     /**
-     * 全量的显示协调.
+     * Explicit reconcile service.
      */
     public void explicitReconcile() {
         lock.lock();
@@ -89,7 +87,7 @@ public class ReconcileService extends AbstractScheduledService {
     }
     
     /**
-     * 隐式协调.
+     * Implicit reconcile service.
      */
     public void implicitReconcile() {
         lock.lock();

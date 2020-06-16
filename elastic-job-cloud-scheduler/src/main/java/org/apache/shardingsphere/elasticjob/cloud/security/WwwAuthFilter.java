@@ -35,9 +35,7 @@ import java.net.URL;
 import java.util.Properties;
 
 /**
- * 认证过滤器.
- * 
- * @author zhangliang 
+ * WWW auth filter.
  */
 @Slf4j
 public final class WwwAuthFilter implements Filter {

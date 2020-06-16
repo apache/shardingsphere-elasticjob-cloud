@@ -39,9 +39,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Mesos状态服务.
- * 
- * @author gaohongtao
+ * Mesos state service.
  */
 @Slf4j
 public class MesosStateService {
@@ -55,28 +53,28 @@ public class MesosStateService {
     }
     
     /**
-     * 注册Mesos的Master信息.
+     * Register master info of Mesos.
      * 
-     * @param hostName Master的主机名
-     * @param port Master端口
+     * @param hostName hostname of master
+     * @param port port of master
      */
     public static synchronized void register(final String hostName, final int port) {
         stateUrl = String.format("http://%s:%d/state", hostName, port);
     }
     
     /**
-     * 注销Mesos的Master信息.
+     * Deregister master info of Mesos.
      */
     public static synchronized void deregister() {
         stateUrl = null;
     }
     
     /**
-     * 获取沙箱信息.
+     * Get sandbox info.
      * 
-     * @param appName 作业云配置App的名字
-     * @return 沙箱信息
-     * @throws JSONException 解析JSON格式异常
+     * @param appName app name
+     * @return sandbox info in json format
+     * @throws JSONException parse json exception
      */
     public JsonArray sandbox(final String appName) throws JSONException {
         JSONObject state = fetch(stateUrl);
@@ -105,11 +103,11 @@ public class MesosStateService {
     }
     
     /**
-     * 查找执行器信息.
+     * Get executor by app name.
      * 
-     * @param appName 作业云配置App的名字
-     * @return 执行器信息
-     * @throws JSONException 解析JSON格式异常
+     * @param appName app name
+     * @return executor state info
+     * @throws JSONException parse json exception
      */
     public Collection<ExecutorStateInfo> executors(final String appName) throws JSONException {
         return Collections2.transform(findExecutors(fetch(stateUrl).getJSONArray("frameworks"), appName), new Function<JSONObject, ExecutorStateInfo>() {
@@ -125,10 +123,10 @@ public class MesosStateService {
     }
     
     /**
-     * 获取所有执行器.
+     * Get all executors.
      *
-     * @return 执行器信息
-     * @throws JSONException 解析JSON格式异常
+     * @return collection of executor state info
+     * @throws JSONException parse json exception
      */
     public Collection<ExecutorStateInfo> executors() throws JSONException {
         return executors(null);

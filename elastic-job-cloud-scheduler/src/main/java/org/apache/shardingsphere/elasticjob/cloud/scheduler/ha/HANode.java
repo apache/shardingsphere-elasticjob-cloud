@@ -18,24 +18,22 @@
 package org.apache.shardingsphere.elasticjob.cloud.scheduler.ha;
 
 /**
- * 保存HA相关数据节点.
- * 
- * @author gaohongtao
+ * HA node.
  */
 public final class HANode {
     
     /**
-     * HA根节点.
+     * HA node.
      */
     public static final String ROOT = "/ha";
     
     /**
-     * FrameworkID保存的节点.
+     * FrameworkID node.
      */
     public static final String FRAMEWORK_ID_NODE = ROOT + "/framework_id";
     
     /**
-     * 选举节点.
+     * Election node.
      */
     public static final String ELECTION_NODE = ROOT + "/election";
 }

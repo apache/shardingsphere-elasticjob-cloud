@@ -18,9 +18,7 @@
 package org.apache.shardingsphere.elasticjob.cloud.restful;
 
 /**
- * REST API异常.
- *
- * @author zhangliang
+ * Restful api exception.
  */
 public final class RestfulException extends RuntimeException {
     

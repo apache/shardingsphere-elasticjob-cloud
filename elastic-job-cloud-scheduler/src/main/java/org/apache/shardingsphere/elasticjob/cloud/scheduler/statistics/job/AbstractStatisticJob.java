@@ -26,9 +26,7 @@ import org.apache.shardingsphere.elasticjob.cloud.scheduler.statistics.util.Stat
 import org.apache.shardingsphere.elasticjob.cloud.statistics.StatisticInterval;
 
 /**
- * 统计作业抽象类.
- *
- * @author liguangyun
+ * Statistic job.
  */
 abstract class AbstractStatisticJob implements StatisticJob {
     

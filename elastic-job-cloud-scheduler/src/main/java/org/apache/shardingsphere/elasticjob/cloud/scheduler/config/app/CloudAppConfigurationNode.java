@@ -21,9 +21,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * 云作业App配置节点路径.
- *
- * @author caohao
+ * Cloud app configuration node.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CloudAppConfigurationNode {

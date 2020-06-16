@@ -47,9 +47,7 @@ import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 /**
- * 云作业应用的REST API.
- *
- * @author caohao
+ * Cloud app restful api.
  */
 @Path("/app")
 public final class CloudAppRestfulApi {
@@ -74,10 +72,10 @@ public final class CloudAppRestfulApi {
     }
     
     /**
-     * 初始化.
+     * Init.
      *
-     * @param producerManager 生产管理器
-     * @param regCenter 注册中心
+     * @param producerManager producer manager
+     * @param regCenter registry center
      */
     public static void init(final CoordinatorRegistryCenter regCenter, final ProducerManager producerManager) {
         CloudAppRestfulApi.regCenter = regCenter;
@@ -86,9 +84,9 @@ public final class CloudAppRestfulApi {
     }
     
     /**
-     * 注册应用配置.
+     * Register app config.
      * 
-     * @param appConfig 应用配置
+     * @param appConfig cloud app config
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -101,9 +99,9 @@ public final class CloudAppRestfulApi {
     }
     
     /**
-     * 更新应用配置.
+     * Update app config.
      *
-     * @param appConfig 应用配置
+     * @param appConfig cloud app config
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -112,10 +110,10 @@ public final class CloudAppRestfulApi {
     }
     
     /**
-     * 查询应用配置.
+     * Query app config.
      *
-     * @param appName 应用配置名称
-     * @return 应用配置
+     * @param appName app name
+     * @return cloud app config
      */
     @GET
     @Path("/{appName}")
@@ -129,9 +127,9 @@ public final class CloudAppRestfulApi {
     }
     
     /**
-     * 查询全部应用配置.
+     * Find all registered app configs.
      * 
-     * @return 全部应用配置
+     * @return collection of registered app configs
      */
     @GET
     @Path("/list")
@@ -141,11 +139,11 @@ public final class CloudAppRestfulApi {
     }
     
     /**
-     * 查询应用是否被禁用.
+     * Query the app is disabled or not.
      * 
-     * @param appName 应用名称
-     * @return 应用是否被禁用
-     * @throws JSONException JSON解析异常
+     * @param appName app name
+     * @return true is disabled, otherwise not
+     * @throws JSONException parse json exception
      */
     @GET
     @Path("/{appName}/disable")
@@ -155,9 +153,9 @@ public final class CloudAppRestfulApi {
     }
     
     /**
-     * 禁用应用.
+     * Disable app config.
      *
-     * @param appName 应用名称
+     * @param appName app name
      */
     @POST
     @Path("/{appName}/disable")
@@ -173,10 +171,10 @@ public final class CloudAppRestfulApi {
     }
     
     /**
-     * 启用应用.
+     * Enable app.
      * 
-     * @param appName 应用名称
-     * @throws JSONException JSON解析异常
+     * @param appName app name
+     * @throws JSONException parse json exception
      */
     @DELETE
     @Path("/{appName}/disable")
@@ -192,9 +190,9 @@ public final class CloudAppRestfulApi {
     }
     
     /**
-     * 注销应用.
+     * Deregister app.
      *
-     * @param appName 应用名称
+     * @param appName app name
      */
     @DELETE
     @Path("/{appName}")

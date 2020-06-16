@@ -26,10 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * 瞬时作业生成器数据访问对象.
- *
- * @author caohao
- * @author zhangliang
+ * Transient producer repository.
  */
 final class TransientProducerRepository {
     

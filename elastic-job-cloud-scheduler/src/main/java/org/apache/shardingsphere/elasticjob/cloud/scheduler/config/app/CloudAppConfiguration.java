@@ -23,9 +23,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
- * 云作业App配置对象.
- *
- * @author caohao
+ * Cloud app configuration.
  */
 @AllArgsConstructor
 @RequiredArgsConstructor

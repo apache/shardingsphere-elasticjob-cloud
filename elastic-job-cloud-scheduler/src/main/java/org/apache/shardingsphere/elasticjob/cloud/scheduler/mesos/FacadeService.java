@@ -46,10 +46,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 为Mesos提供的门面服务.
- *
- * @author zhangliang
- * @author caohao
+ * Mesos facade service.
  */
 @Slf4j
 public final class FacadeService {
@@ -82,7 +79,7 @@ public final class FacadeService {
     }
     
     /**
-     * 启动门面服务.
+     * Start facade service.
      */
     public void start() {
         log.info("Elastic Job: Start facade service");
@@ -90,9 +87,9 @@ public final class FacadeService {
     }
     
     /**
-     * 获取有资格运行的作业.
+     * Get eligible job.
      * 
-     * @return 作业上下文集合
+     * @return collection of eligible job context
      */
     public Collection<JobContext> getEligibleJobContext() {
         Collection<JobContext> failoverJobContexts = failoverService.getAllEligibleJobContexts();
@@ -104,9 +101,9 @@ public final class FacadeService {
     }
     
     /**
-     * 从队列中删除已运行的作业.
+     * Remove launched task from queue.
      * 
-     * @param taskContexts 任务上下文集合
+     * @param taskContexts task running contexts
      */
     public void removeLaunchTasksFromQueue(final List<TaskContext> taskContexts) {
         List<TaskContext> failoverTaskContexts = new ArrayList<>(taskContexts.size());
@@ -134,37 +131,37 @@ public final class FacadeService {
     }
     
     /**
-     * 将任务运行时上下文放入运行时队列.
+     * Add task to running queue.
      *
-     * @param taskContext 任务运行时上下文
+     * @param taskContext task running context
      */
     public void addRunning(final TaskContext taskContext) {
         runningService.add(taskContext);
     }
     
     /**
-     * 更新常驻作业运行状态.
+     * Update daemon task status.
      * 
-     * @param taskContext 任务运行时上下文
-     * @param isIdle 是否空闲
+     * @param taskContext task running context
+     * @param isIdle set to idle or not
      */
     public void updateDaemonStatus(final TaskContext taskContext, final boolean isIdle) {
         runningService.updateIdle(taskContext, isIdle);
     }
     
     /**
-     * 将任务从运行时队列删除.
+     * Remove task from running queue.
      *
-     * @param taskContext 任务运行时上下文
+     * @param taskContext task running context
      */
     public void removeRunning(final TaskContext taskContext) {
         runningService.remove(taskContext);
     }
     
     /**
-     * 记录失效转移队列.
+     * Record task to failover queue.
      * 
-     * @param taskContext 任务上下文
+     * @param taskContext task running context
      */
     public void recordFailoverTask(final TaskContext taskContext) {
         Optional<CloudJobConfiguration> jobConfigOptional = jobConfigService.load(taskContext.getMetaInfo().getJobName());
@@ -185,48 +182,48 @@ public final class FacadeService {
     }
     
     /**
-     * 将瞬时作业放入待执行队列.
+     * Add transient job to ready queue.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void addTransient(final String jobName) {
         readyService.addTransient(jobName);
     }
     
     /**
-     * 根据作业名称获取云作业配置.
+     * Load cloud job config.
      *
-     * @param jobName 作业名称
-     * @return 云作业配置
+     * @param jobName job name
+     * @return cloud job config
      */
     public Optional<CloudJobConfiguration> load(final String jobName) {
         return jobConfigService.load(jobName);
     }
     
     /**
-     * 根据作业应用名称获取云作业应用配置.
+     * Load app config by app name.
      *
-     * @param appName 作业应用名称
-     * @return 云作业应用配置
+     * @param appName app name
+     * @return cloud app config
      */
     public Optional<CloudAppConfiguration> loadAppConfig(final String appName) {
         return appConfigService.load(appName);
     }
     
     /**
-     * 根据作业元信息获取失效转移作业Id.
+     * Get failover task id by task meta info.
      *
-     * @param metaInfo 作业元信息
-     * @return 失效转移作业Id
+     * @param metaInfo task meta info
+     * @return failover task id
      */
     public Optional<String> getFailoverTaskId(final TaskContext.MetaInfo metaInfo) {
         return failoverService.getTaskId(metaInfo);
     }
     
     /**
-     * 将常驻作业放入待执行队列.
+     * Add daemon job to ready queue.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void addDaemonJobToReadyQueue(final String jobName) {
         Optional<CloudJobConfiguration> jobConfigOptional = jobConfigService.load(jobName);
@@ -240,12 +237,10 @@ public final class FacadeService {
     }
     
     /**
-     * 根据作业执行类型判断作业是否在运行.
+     * Determine whether the task is running or not.
      *
-     * <p>READY类型的作业为整体, 任意一片运行都视为作业运行. FAILOVER则仅以当前分片运行为运行依据.</p>
-     * 
-     * @param taskContext 任务运行时上下文
-     * @return 作业是否在运行
+     * @param taskContext task running context
+     * @return true is running, otherwise not
      */
     public boolean isRunning(final TaskContext taskContext) {
         return ExecutionType.FAILOVER != taskContext.getType() && !runningService.getRunningTasks(taskContext.getMetaInfo().getJobName()).isEmpty()
@@ -253,57 +248,57 @@ public final class FacadeService {
     }
     
     /**
-     * 添加任务主键和主机名称的映射.
+     * Add mapping of the task primary key and host name.
      *
-     * @param taskId 任务主键
-     * @param hostname 主机名称
+     * @param taskId task primary key
+     * @param hostname host name
      */
     public void addMapping(final String taskId, final String hostname) {
         runningService.addMapping(taskId, hostname);
     }
     
     /**
-     * 根据任务主键获取主机名称并清除该任务.
+     * Retrieve hostname and then remove task.
      *
-     * @param taskId 任务主键
-     * @return 删除任务的主机名称
+     * @param taskId task primary key
+     * @return hostname of the removed task
      */
     public String popMapping(final String taskId) {
         return runningService.popMapping(taskId);
     }
     
     /**
-     * 获取待运行的全部任务.
+     * Get all ready tasks.
      *
-     * @return 待运行的全部任务
+     * @return ready tasks
      */
     public Map<String, Integer> getAllReadyTasks() {
         return readyService.getAllReadyTasks();
     }
     
     /**
-     * 获取所有运行中的任务.
+     * Get all running tasks.
      *
-     * @return 运行中任务集合
+     * @return running tasks
      */
     public Map<String, Set<TaskContext>> getAllRunningTasks() {
         return runningService.getAllRunningTasks();
     }
     
     /**
-     * 获取待失效转移的全部任务.
+     * Get all failover tasks.
      *
-     * @return 待失效转移的全部任务
+     * @return failover tasks
      */
     public Map<String, Collection<FailoverTaskInfo>> getAllFailoverTasks() {
         return failoverService.getAllFailoverTasks();
     }
     
     /**
-     * 判断作业是否被禁用.
+     * Determine whether the job is disable or not.
      * 
-     * @param jobName 作业名称
-     * @return 作业是否被禁用
+     * @param jobName job name
+     * @return true is disabled, otherwise not
      */
     public boolean isJobDisabled(final String jobName) {
         Optional<CloudJobConfiguration> jobConfiguration = jobConfigService.load(jobName);
@@ -311,27 +306,27 @@ public final class FacadeService {
     }
     
     /**
-     * 将作业移出禁用队列.
+     * Enable job.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void enableJob(final String jobName) {
         disableJobService.remove(jobName);
     }
     
     /**
-     * 将作业放入禁用队列.
+     * Disable job.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void disableJob(final String jobName) {
         disableJobService.add(jobName);
     }
     
     /**
-     * 获取所有正在运行的Executor的信息.
+     * Get all running executor info.
      * 
-     * @return Executor信息集合
+     * @return collection of executor info
      * @throws JSONException json exception
      */
     public Collection<MesosStateService.ExecutorStateInfo> loadExecutorInfo() throws JSONException {
@@ -339,11 +334,11 @@ public final class FacadeService {
     }
     
     /**
-     * 停止门面服务.
+     * Stop facade service.
      */
     public void stop() {
         log.info("Elastic Job: Stop facade service");
-        // TODO 停止作业调度
+        // TODO stop scheduler
         runningService.clear();
     }
 }

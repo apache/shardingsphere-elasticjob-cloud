@@ -18,9 +18,7 @@
 package org.apache.shardingsphere.elasticjob.cloud.scheduler.config.job;
 
 /**
- * 作业执行类型.
- *
- * @author zhangliang
+ * Cloud job execution type.
  */
 public enum CloudJobExecutionType {
     

@@ -32,9 +32,7 @@ import org.apache.mesos.SchedulerDriver;
 import java.util.List;
 
 /**
- * 作业云引擎.
- *
- * @author zhangliang
+ * Scheduler engine.
  */
 @RequiredArgsConstructor
 @Slf4j

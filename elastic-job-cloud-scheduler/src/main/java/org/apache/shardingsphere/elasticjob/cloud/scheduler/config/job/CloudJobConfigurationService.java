@@ -27,9 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 作业配置服务.
- *
- * @author zhangliang
+ * Cloud job configuration service.
  */
 @RequiredArgsConstructor
 public final class CloudJobConfigurationService {
@@ -37,27 +35,27 @@ public final class CloudJobConfigurationService {
     private final CoordinatorRegistryCenter regCenter;
     
     /**
-     * 添加云作业配置.
+     * Add cloud job configuration.
      * 
-     * @param jobConfig 云作业配置对象
+     * @param jobConfig cloud job configuration
      */
     public void add(final CloudJobConfiguration jobConfig) {
         regCenter.persist(CloudJobConfigurationNode.getRootNodePath(jobConfig.getJobName()), CloudJobConfigurationGsonFactory.toJson(jobConfig));
     }
     
     /**
-     * 修改云作业配置.
+     * Update cloud job configuration.
      *
-     * @param jobConfig 云作业配置对象
+     * @param jobConfig cloud job configuration
      */
     public void update(final CloudJobConfiguration jobConfig) {
         regCenter.update(CloudJobConfigurationNode.getRootNodePath(jobConfig.getJobName()), CloudJobConfigurationGsonFactory.toJson(jobConfig));
     }
     
     /**
-     * 获取所有注册的云作业配置.
-     * 
-     * @return 注册的云作业配置
+     * Load all registered cloud job configurations.
+     *
+     * @return collection of the registered cloud job configuration
      */
     public Collection<CloudJobConfiguration> loadAll() {
         if (!regCenter.isExisted(CloudJobConfigurationNode.ROOT)) {
@@ -75,19 +73,19 @@ public final class CloudJobConfigurationService {
     }
     
     /**
-     * 根据作业名称获取云作业配置.
-     * 
-     * @param jobName 作业名称
-     * @return 云作业配置
+     * Load cloud job configuration by job name.
+     *
+     * @param jobName job name
+     * @return cloud job configuration
      */
     public Optional<CloudJobConfiguration> load(final String jobName) {
         return Optional.fromNullable(CloudJobConfigurationGsonFactory.fromJson(regCenter.get(CloudJobConfigurationNode.getRootNodePath(jobName))));
     }
     
     /**
-     * 删除云作业.
+     * Remove cloud job configuration.
      *
-     * @param jobName 作业名称
+     * @param jobName job name
      */
     public void remove(final String jobName) {
         regCenter.remove(CloudJobConfigurationNode.getRootNodePath(jobName));

@@ -23,9 +23,7 @@ import org.apache.shardingsphere.elasticjob.cloud.exception.JobSystemException;
 import org.apache.shardingsphere.elasticjob.cloud.reg.base.CoordinatorRegistryCenter;
 
 /**
- * 调度器选举候选人.
- *
- * @author caohao
+ * Scheduler election candidate.
  */
 public final class SchedulerElectionCandidate implements ElectionCandidate {
     

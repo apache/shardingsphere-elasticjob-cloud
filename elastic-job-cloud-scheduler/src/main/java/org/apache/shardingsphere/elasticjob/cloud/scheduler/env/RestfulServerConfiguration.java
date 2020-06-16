@@ -21,9 +21,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Restful服务器配置项.
- *
- * @author zhangliang
+ * Restful config.
  */
 @RequiredArgsConstructor
 @Getter

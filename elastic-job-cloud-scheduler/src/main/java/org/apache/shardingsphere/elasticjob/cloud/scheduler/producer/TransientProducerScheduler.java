@@ -41,9 +41,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * 发布瞬时作业任务的调度器.
- *
- * @author caohao
+ * Transient producer scheduler.
  */
 final class TransientProducerScheduler {
     
@@ -87,7 +85,7 @@ final class TransientProducerScheduler {
         return result;
     }
     
-    // TODO 并发优化
+    // TODO Concurrency optimization
     synchronized void register(final CloudJobConfiguration jobConfig) {
         String cron = jobConfig.getTypeConfig().getCoreConfig().getCron();
         JobKey jobKey = buildJobKey(cron);

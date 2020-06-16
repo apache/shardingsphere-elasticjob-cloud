@@ -60,10 +60,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 任务提交调度服务.
- * 
- * @author zhangliang
- * @author gaohongtao
+ * Task launch schedule service.
  */
 @RequiredArgsConstructor
 @Slf4j

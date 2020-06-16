@@ -21,15 +21,13 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * 状态根节点路径.
- *
- * @author zhangliang
+ * State node.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class StateNode {
     
     /**
-     * 状态根节点.
+     * Root state node.
      */
     public static final String ROOT = "/state";
 }

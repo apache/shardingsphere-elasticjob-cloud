@@ -36,9 +36,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
 /**
- * 基于GSON解析JSON的解析器.
- *
- * @author zhangliang
+ * Gson provider.
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
