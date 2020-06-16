@@ -176,8 +176,8 @@ public final class CloudAppRestfulApi {
      * @param appName app name
      * @throws JSONException parse json exception
      */
-    @DELETE
-    @Path("/{appName}/disable")
+    @POST
+    @Path("/{appName}/enable")
     public void enable(@PathParam("appName") final String appName) throws JSONException {
         if (appConfigService.load(appName).isPresent()) {
             disableAppService.remove(appName);
