@@ -317,7 +317,7 @@ public final class CloudJobRestfulApiTest extends AbstractCloudRestfulApiTest {
         Mockito.when(getRegCenter().getChildrenKeys("/config/job")).thenReturn(Lists.newArrayList("test_job"));
         Mockito.when(getRegCenter().get("/config/app/test_app")).thenReturn(CloudAppJsonConstants.getAppJson("test_app"));
         Mockito.when(getRegCenter().get("/config/job/test_job")).thenReturn(CloudJsonConstants.getJobJson());
-        Assert.assertThat(RestfulTestsUtil.sentRequest("http://127.0.0.1:19000/api/job/test_job/disable", "DELETE", "test_job"), Is.is(204));
+        Assert.assertThat(RestfulTestsUtil.sentRequest("http://127.0.0.1:19000/api/job/test_job/enable", "POST", "test_job"), Is.is(204));
         Mockito.verify(getRegCenter()).remove("/state/disable/job/test_job");
     }
 }
