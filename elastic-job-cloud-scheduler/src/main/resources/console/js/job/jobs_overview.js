@@ -161,8 +161,8 @@ function bindEnableJobButton() {
             showFailDialog();
         } else {
             $.ajax({
-                url: "/api/job/" + jobName + "/disable",
-                type: "DELETE",
+                url: "/api/job/" + jobName + "/enable",
+                type: "POST",
                 contentType: "application/json",
                 success: function(result) {
                     $("#job-table").bootstrapTable("refresh");
@@ -196,7 +196,7 @@ function renderJob(job) {
     $("#job-execution-type").val(job.jobExecutionType);
     $("#sharding-total-count").attr("value", job.shardingTotalCount);
     $("#job-parameter").attr("value", job.jobParameter);
-    $("#cpu-count").attr("value", job.cpuCount); 
+    $("#cpu-count").attr("value", job.cpuCount);
     $("#job-memory").attr("value", job.memoryMB);
     $("#bean-name").attr("value", job.beanName);
     $("#application-context").attr("value", job.applicationContext);

@@ -113,8 +113,8 @@ function bindEnableAppButton() {
     $(document).on("click", "button[operation='enableApp'][data-toggle!='modal']", function(event) {
         var appName = $(event.currentTarget).attr("appName");
         $.ajax({
-            url: "/api/app/" + appName + "/disable",
-            type: "DELETE",
+            url: "/api/app/" + appName + "/enable",
+            type: "POST",
             contentType: "application/json",
             success: function(result) {
                 showSuccessDialog();
@@ -169,7 +169,7 @@ function bindDeleteAppButton() {
 
 function renderApp(app) {
     $("#app-name").attr("value", app.appName);
-    $("#cpu-count").attr("value", app.cpuCount); 
+    $("#cpu-count").attr("value", app.cpuCount);
     $("#app-memory").attr("value", app.memoryMB);
     $("#bootstrap-script").attr("value", app.bootstrapScript);
     $("#app-url").attr("value", app.appURL);

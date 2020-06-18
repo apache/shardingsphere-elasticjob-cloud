@@ -174,8 +174,8 @@ public final class CloudJobRestfulApi {
      * @param jobName job name
      * @throws JSONException parse json exception
      */
-    @DELETE
-    @Path("/{jobName}/disable")
+    @POST
+    @Path("/{jobName}/enable")
     public void enable(@PathParam("jobName") final String jobName) throws JSONException {
         Optional<CloudJobConfiguration> configOptional = configService.load(jobName);
         if (configOptional.isPresent()) {
