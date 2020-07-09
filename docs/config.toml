@@ -1,3 +1,0 @@
-baseurl = "https://shardingsphere.apache.org/elasticjob/cloud"
-canonifyurls = true
-theme = "hugo-theme-learn"
